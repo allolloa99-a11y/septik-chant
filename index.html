@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEP⸸IK CHAN⸸ | NO SALVATION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #000; --bone: #ffffff; --dim: #111; --red: #600; --line-weight: 1px; }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--bone); font-family: 'Courier Prime', monospace; overflow-x: hidden; text-transform: uppercase; }
+
+        /* ДЕКОР */
+        .ui-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: 20px solid var(--bg); border-left: var(--line-weight) solid var(--bone); border-right: var(--line-weight) solid var(--bone); pointer-events: none; z-index: 50; }
+        .blood-stream { position: fixed; top: 0; left: 10%; width: var(--line-weight); height: 100%; background: linear-gradient(to bottom, transparent, var(--red), transparent); z-index: 100; opacity: 0.3; animation: flow 20s infinite; }
+        .blood-stream.right { left: 90%; animation-delay: 5s; }
+        @keyframes flow { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+        .scanner-line { position: fixed; top: 0; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.03); z-index: 60; animation: scan 4s linear infinite; }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* ТИПОГРАФИЯ */
+        .latin { font-family: 'UnifrakturMaguntia', serif; text-transform: none; font-size: 3em; }
+        .glitch-text:hover { animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite; text-shadow: 2px 0 0 rgba(255,0,0,0.7), -2px -2px 0 rgba(0,255,0,0.7); }
+        @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 100% { transform: translate(0); } }
+
+        /* HEADER */
+        header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-bottom: var(--line-weight) solid var(--bone); }
+        .logo { font-size: 6vw; letter-spacing: -5px; font-weight: 700; margin: 0; }
+        nav { margin-top: 50px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .nav-link { color: #444; text-decoration: none; font-size: 0.8em; transition: 0.4s; cursor: pointer; letter-spacing: 2px; padding: 5px 10px; border: 1px solid transparent; }
+        .nav-link:hover { color: var(--bone); border-color: var(--bone); }
+
+        /* MAIN CONTENT */
+        main { width: 75%; margin: 0 auto; position: relative; z-index: 10; }
+        .section { padding: 120px 0; border-bottom: 1px solid var(--dim); }
+        .info-block { border-left: var(--line-weight) solid var(--red); padding-left: 30px; margin-top: 40px; }
+        .art-frame { border: 1px solid var(--bone); height: 350px; background: #050505; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .art-frame img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: 0.5s; filter: grayscale(1); }
+        .art-frame:hover img { opacity: 1; filter: grayscale(0); }
+
+        /* VAULTS */
+        .full-page { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 2000; display: none; overflow-y: auto; padding: 100px 10%; border: 1px solid var(--bone); }
+        .close-btn { position: fixed; top: 40px; right: 40px; color: var(--red); cursor: pointer; font-size: 0.8em; z-index: 2100; background: none; border: none; }
+        .report-box-vault { border-left: 1px solid var(--red); padding: 30px; margin-bottom: 40px; background: #050505; }
+
+        /* UI ELEMENTS */
+        .vessels-monitor { position: fixed; bottom: 20px; left: 20px; border: 1px solid var(--dim); background: rgba(0,0,0,0.9); padding: 10px; font-size: 0.6em; z-index: 200; width: 180px; }
+        .vessel-row { display: flex; justify-content: space-between; margin-bottom: 5px; color: #444; }
+        .vessel-row.active { color: var(--bone); }
+        .typewriter { overflow: hidden; border-right: 2px solid var(--bone); white-space: nowrap; width: 0; display: inline-block; }
+        .type-active { animation: typing 3.5s steps(40, end) forwards; }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+
+            /* СТИЛЬ ШЕПОТУ */
+#void-whisper {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7em;
+    color: var(--red);
+    letter-spacing: 5px;
+    z-index: 6000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    text-shadow: 0 0 5px var(--red);
+}
+
+        /* ЕФЕКТ БІЛОГО ШУМУ */
+#noise-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('https://media.giphy.com/media/oEI9uWUPr9mEw/giphy.gif'); /* Статичний шум */
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: screen;
+}
+
+/* КЛАС ДЛЯ ТРЕМТІННЯ ВСЬОГО САЙТУ */
+.crash-shake {
+    animation: screen-shake 0.2s infinite;
+}
+
+@keyframes screen-shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    25% { transform: translate(-1px, -2px) rotate(-1deg); }
+    50% { transform: translate(-3px, 0px) rotate(1deg); }
+    75% { transform: translate(3px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -1px) rotate(1deg); }
+}
+
+.death-scroll {
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+    border-top: 1px solid #111;
+    padding: 10px 0;
+    white-space: nowrap;
+    position: relative;
+}
+.scroll-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll-death 60s linear infinite;
+    font-size: 0.6em;
+    color: #222;
+    letter-spacing: 10px;
+}
+@keyframes scroll-death {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 10px rgba(102, 0, 0, 0.4); }
+    50% { box-shadow: 0 0 30px rgba(102, 0, 0, 0.8); }
+    100% { box-shadow: 0 0 10px rgba(102, 0, 0, 0.4); }
+}
+
+.nav-link[onclick="openVault('v-library-vault')"] {
+    animation: pulse-red 2s infinite;
+}
+
+.nav-link[onclick="openVault('v-library-vault')"]:hover {
+    background: var(--bone) !important;
+    color: #000 !important;
+    transform: scale(1.05);
+}
+
+        body {
+    margin: 0;
+    padding: 0;
+    /* Накладываем градиент поверх фото для читаемости текста */
+    background: radial-gradient(circle, rgba(0,0,1,1.9) 0%, rgba(0,0,0,0.9) 100%), 
+                url('unnamed.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--bone);
+    font-family: 'Courier Prime', monospace;
+}
+
+            /* ПЕНТАГРАМА В ЦЕНТРІ */
+.pentagram-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    opacity: 0.15; /* Ледь помітна, щоб не перебивати текст */
+    z-index: -1; /* За текстом завантаження */
+    animation: rotate-penta 20s linear infinite, pulse-penta 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes rotate-penta {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes pulse-penta {
+    0%, 100% { opacity: 0.1; filter: drop-shadow(0 0 5px var(--red)); }
+    50% { opacity: 0.3; filter: drop-shadow(0 0 20px var(--red)); }
+}
+
+    </style>
+</head>
+
+
+
+<div class="death-scroll">
+    <div class="scroll-text">
+        NO_SALVATION // NO_DIGITAL_SALVATION // TRUE_BLACK_METAL // SEP7IK_CHANT_RECORDS // ENTROPY_IS_LAW // PHYSICAL_ONLY // VOID_IS_COMING...
+    </div>
+</div>
+<body>
+
+<div id="boot-screen">
+    <svg class="pentagram-loader" viewBox="0 0 100 100">
+        <path d="M50 2 L62 38 L98 38 L69 60 L80 96 L50 74 L20 96 L31 60 L2 38 L38 38 Z" 
+              fill="none" 
+              stroke="#ff0000" 
+              stroke-width="1.5"/>
+        <circle cx="50" cy="50" r="48" fill="none" stroke="#ff0000" stroke-width="1"/>
+    </svg>
+    
+    <div id="boot-log"></div>
+</div>
+
+<div id="noise-overlay"></div>
+<div id="void-whisper"></div>
+
+<div class="ui-overlay"></div>
+<div class="blood-stream"></div>
+<div class="blood-stream right"></div>
+<div class="scanner-line"></div>
+
+<div class="audio-trigger" id="audio-ctrl" onclick="toggleAudio()" style="position:fixed; top:40px; right:40px; z-index:5000; cursor:pointer; font-size:0.7em; color:#333;">[ INITIATE_AUDIO_FEED ]</div>
+<audio id="terminal-hum" loop><source src="01. Freezing Moon.mp3" type="audio/mpeg"></audio>
+
+<header>
+    <div class="logo">SEP⸸IK CHAN⸸</div>
+    <div class="sub-logo" style="letter-spacing:10px; color:#444; margin-top:10px;">INTERNAL TERMINAL // PSY-WARD 07</div>
+    <nav>
+        <a href="#arch" class="nav-link">[ ARCHIVE ]</a>
+        <a href="#galleria" class="nav-link">[ GALLERIA ]</a>
+        <a href="#dogma" class="nav-link">[ DOGMA ]</a>
+        <a href="#lib" class="nav-link">[ LIBRARIVM ]</a>
+        <a onclick="openVault('v-archive')" class="nav-link" style="color:var(--bone);">[ OPEN_VAULT ]</a>
+    </nav>
+</header>
+
+<main>
+
+
+
+        <section id="distro" class="section" style="border-top: 1px solid var(--bone);">
+    <span class="latin">Distro.</span>
+    <div class="release-card" style="margin-top: 50px;">
+        <div class="art-frame">
+            <img src="https://via.placeholder.com/400x600/000/fff?text=RAW_TAPE_01" alt="Tape">
+        </div>
+        <div class="info-block">
+            <h3 class="latin" style="font-size: 1.5em;">SC-001: VOID_RESONANCE</h3>
+            <p style="color: var(--red); font-weight: bold;">[ LIMITED TO 07 COPIES ]</p>
+            <p style="margin-top: 20px; color: #666;">RAW BLACK METAL / AMBIENT. ЗАПИСАНО НА ИСПОЛЬЗОВАННЫЕ ПЛЕНКИ ИЗ ПСИХИАТРИЧЕСКОЙ БОЛЬНИЦЫ.</p>
+            <p style="margin-top: 20px;">PRICE: 6.66 EUR / TRADE ONLY</p>
+            <br>
+            <a onclick="openVault('v-chat')" class="nav-link" style="color: var(--red);">[ JOIN_THE_CELL ]</a>
+            <a class="nav-link" href="mailto:your@email.com" style="border: 1px solid var(--red);">[ ORDER_VIA_MAIL ]</a>
+        </div>
+    </div>
+
+
+    
+<main id="main-view" style="padding: 60px;">
+
+    <section class="section" style="margin-bottom: 80px; border-bottom: 1px solid var(--dim); padding-bottom: 60px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="max-width: 65%;">
+                <span class="latin">CD_&_Tapes.</span>
+                <p style="color: #666; margin-top: 20px;">МАЛОТИРАЖНЫЕ ИЗДАНИЯ НА МАГНИТНОЙ ЛЕНТЕ И ОПТИЧЕСКИХ НОСИТЕЛЯХ. СЫРОЙ ЗВУК ДЛЯ ВАШИХ ПРОИГРЫВАТЕЛЕЙ.</p>
+            </div>
+            <a class="nav-link" onclick="openVault('v-cd-distro')" style="white-space: nowrap; margin-top: 50px;">[ ACCESS_CD_VAULT ]</a>
+        </div>
+        
+        <div style="margin-top: 40px; padding: 20px; border-left: 1px solid var(--red); background: rgba(10,0,0,0.3);">
+            <p style="font-size: 0.8em; line-height: 1.6; color: #888;">
+                <span style="color: var(--red);">[ DOGMA_I ]:</span> МЫ ПРОТИВ ЦИФРОВОЙ ВЫКЛАДКИ. ТРЕКИ В СЕТИ — ЭТО МУСОР, НЕ ИМЕЮЩИЙ ВЕСА. ЦИФРА НЕ ПЕРЕДАЕТ БОЛЬ РАСПАДА.
+            </p>
+        </div>
+    </section>
+
+    <section class="section" style="margin-bottom: 80px; border-bottom: 1px solid var(--dim); padding-bottom: 60px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="max-width: 65%;">
+                <span class="latin">Vinyl_Records.</span>
+                <p style="color: #666; margin-top: 20px;">ТЯЖЕЛЫЙ ЧЕРНЫЙ ВОСК. ВЫСШАЯ ФОРМА ФИЗИЧЕСКОЙ ФИКСАЦИИ БЛЕК-МЕТАЛЛА. ТОЛЬКО ТРУ-ФОРМАТ.</p>
+            </div>
+            <a class="nav-link" onclick="openVault('v-vinyl-distro')" style="white-space: nowrap; margin-top: 50px;">[ OPEN_PLAS⸸IQVVM ]</a>
+        </div>
+
+        <div style="margin-top: 40px; padding: 20px; border-right: 1px solid var(--red); text-align: right; background: rgba(10,0,0,0.3);">
+            <p style="font-size: 0.8em; line-height: 1.6; color: #888;">
+                МЫ ПРИЗНАЕМ ТОЛЬКО ФИЗИЧЕСКУЮ БОЛЬ НОСИТЕЛЯ. ВИНИЛ — ЭТО РИТУАЛ, ДОСТУПНЫЙ НЕ ВСЕМ. 
+                <span style="color: var(--red);">SEP⸸IK CHAN⸸</span> ЭТО ЧИСТАЯ ПАТОЛОГИЯ. 
+                <span onclick="openVault('v-chat')" style="cursor: default; opacity: 0.3;">⸸</span>
+            </p>
+        </div>
+    </section>
+
+    <section id="manifesto-final" class="section" style="border: 1px solid var(--red); padding: 50px; margin-top: 40px; text-align: center;">
+        <h2 class="latin" style="color: var(--red); font-size: 2em; margin: 0;">Anti-Digital_Manifesto</h2>
+        <p style="margin-top: 20px; letter-spacing: 2px;">TRUE BLACK METAL NEVER DIES // PHYSICAL SUPREMACY</p>
+    </section>
+
+</main>
+    
+        <section id="vinyl" class="section">
+    <span class="latin">Plas⸸iqvvm.</span>
+    <div style="margin-top: 50px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+        <div style="border: 1px solid #111; padding: 20px;">
+            <div class="art-frame" style="height: 300px; position: relative;">
+                <img src="https://via.placeholder.com/600/000/fff?text=LP_GATEFOLD_SCAN" style="opacity: 0.6;">
+                <div style="position: absolute; top: 10px; left: 10px; background: var(--red); color: black; font-size: 0.6em; padding: 2px 5px;">[ IN_STOCK ]</div>
+            </div>
+            <h3 style="font-size: 0.8em; margin-top: 20px;">SC-LP-01: ANNIHILATION RITUAL</h3>
+            <p style="color: #444; font-size: 0.7em;">12" BLACK VINYL / GATEFOLD / 180G</p>
+            <p style="margin-top: 15px; font-size: 0.8em;">LIMITED TO 100 HAND-NUMBERED COPIES.</p>
+            <a class="nav-link" href="mailto:order@septikchant.com" style="margin-top: 20px; display: block; text-align: center;">[ ACQUIRE_LP ]</a>
+        </div>
+
+        <div style="border: 1px solid #111; padding: 20px;">
+            <div class="art-frame" style="height: 300px; position: relative;">
+                <img src="https://via.placeholder.com/600/000/fff?text=7INCH_EP_SCAN" style="opacity: 0.6;">
+                <div style="position: absolute; top: 10px; left: 10px; background: #333; color: white; font-size: 0.6em; padding: 2px 5px;">[ SOLD_OUT ]</div>
+            </div>
+            <h3 style="font-size: 0.8em; margin-top: 20px;">SC-EP-07: COLD_VOID_WHISPERS</h3>
+            <p style="color: #444; font-size: 0.7em;">7" CLEAR VINYL / SILKSCREEN COVER</p>
+            <p style="margin-top: 15px; font-size: 0.8em;">NO REPRESS. FOREVER DEAD.</p>
+        </div>
+    </div>
+</section>
+
+</section>
+
+    <section id="arch" class="section" style="display:flex; justify-content:space-between; align-items:center;">
+        <div style="max-width:60%;">
+            <span class="latin">Nigrvm Vita.</span>
+            <p style="color:#666; margin-top:20px; line-height:1.8;">SEP⸸IK CHAN⸸ — это не лейбл. Это способ зафиксировать момент разложения звука. Мы ищем тех, кто уже мертв внутри.</p>
+        </div>
+        <a class="nav-link" onclick="openVault('v-archive')">[ ENTER_ARCHIVE ]</a>
+    </section>
+
+    <section id="galleria" class="section">
+        <h2 style="letter-spacing:20px; text-align:center; margin-bottom:80px;">X-RAY_VISUALS</h2>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:10px;">
+            <div class="art-frame"><img src="https://via.placeholder.com/400x600/000/fff?text=SCAN_01"></div>
+            <div class="art-frame"><img src="https://via.placeholder.com/400x600/000/fff?text=SCAN_02"></div>
+            <div class="art-frame"><img src="https://via.placeholder.com/400x600/000/fff?text=SCAN_03"></div>
+            <div class="art-frame"><img src="https://via.placeholder.com/400x600/000/fff?text=SCAN_04"></div>
+        </div>
+        <div style="text-align:center; margin-top:50px;">
+            <a class="nav-link" onclick="openVault('v-gallery')">[ VIEW_FULL_DECAY ]</a>
+        </div>
+    </section>
+
+    <section id="dogma" class="section" style="border-left:1px solid var(--dim); padding-left:50px;">
+        <span class="latin">Mandata.</span>
+        <div class="info-block">
+            <h2 style="font-size:0.9em;">01. ПРИНЦИП ИЗОЛЯЦИИ</h2>
+            <p style="color:#666; font-size:0.8em; line-height:1.8;">Звук должен рождаться в вакууме. Мы отрицаем сотрудничество с внешним миром.</p>
+        </div>
+        <div class="info-block" style="margin-top:80px;">
+            <h2 style="font-size:0.9em;">02. ЭСТЕТИКА РАСПАДА</h2>
+            <p style="color:#666; font-size:0.8em; line-height:1.8;">Чистота — это ложь. Мы фиксируем момент патологии звука.</p>
+        </div>
+        <div class="info-block" style="margin-top:80px;">
+            <h2 style="font-size:0.9em;">03. КЛИНИЧЕСКИЙ НИГИЛИЗМ</h2>
+            <p style="color:#666; font-size:0.8em; line-height:1.8;">Бог умер в операционной. Мы записываем шум кардиограммы после финала.</p>
+        </div>
+    </section>
+
+    <section id="lib" class="section">
+        <h2 style="letter-spacing:15px; border-bottom:1px solid var(--bone); padding-bottom:20px;">LIBRARIVM_PROHIBI⸸VM</h2>
+        <div style="margin-top:50px;">
+            <div style="display:flex; justify-content:space-between; padding:20px 0; border-bottom:1px solid #111;"><span>ЭМИЛЬ ЧОРАН</span><span style="color:#333;">[ ГОРЬКИЕ СИЛЛОГИЗМЫ ]</span></div>
+            <div style="display:flex; justify-content:space-between; padding:20px 0; border-bottom:1px solid #111;"><span>ЮЛИУС ЭВОЛА</span><span style="color:#333;">[ ОСЕДЛАТЬ ТИГРА ]</span></div>
+            <div style="display:flex; justify-content:space-between; padding:20px 0; border-bottom:1px solid #111;"><span>МАКС ШТИРНЕР</span><span style="color:#333;">[ ЕДИНСТВЕННЫЙ ]</span></div>
+            <div style="display:flex; justify-content:space-between; padding:20px 0; border-bottom:1px solid #111;"><span>ФИЛИПП МЕЙНЛЕНДЕР</span><span style="color:#333;">[ ФИЛОСОФИЯ ОСВОБОЖДЕНИЯ ]</span></div>
+
+        </div>
+
+</section>
+
+<section id="library-central" class="section" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 150px 0; border-top: 1px solid #111;">
+    <span class="latin" style="font-size: 5em; color: var(--bone); margin-bottom: 30px; display: block;">Librarivm</span>
+    <p style="color: #444; max-width: 600px; margin-bottom: 60px; letter-spacing: 2px; line-height: 1.6;">
+        ПОЛНЫЙ ИНДЕКС ЗАПРЕЩЕННОЙ ЛИТЕРАТУРЫ. ФИЛОСОФИЯ ОТРЕЧЕНИЯ, НИГИЛИЗМА И ТЬМЫ.
+    </p>
+
+    <a onclick="openVault('v-library-vault')" style="
+        display: inline-block;
+        background: #f00 !important; 
+        color: #000 !important; 
+        padding: 25px 80px !important; 
+        font-family: 'Courier Prime', monospace;
+        font-weight: bold;
+        font-size: 1.5em;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+        text-transform: uppercase;
+        letter-spacing: 5px;
+    ">
+        [ ACCESS_THE_CATALOG ]
+    </a>
+</section>
+
+        <div style="text-align:right; margin-top:30px;">
+            <a class="nav-link" onclick="openVault('v-lib')">[ ACCESS_FULL_INDEX ]</a>
+        </div>
+    </section>
+
+    <section id="grim" class="section" style="text-align:center; border-top:1px solid var(--red); margin-top:100px;">
+        <span class="latin" style="color:var(--red);">Grimorivm.</span>
+        <div style="margin-top:50px;">
+            <p class="typewriter" id="grim-intro">"СЛОВА, ВЫРЕЗАННЫЕ НА КОСТЯХ МЕРТВЫХ БОГОВ..."</p>
+            <br><br>
+            <a class="nav-link" onclick="openVault('v-grimoire')" style="color:var(--red);">[ READ_INCANTATIONS ]</a>
+        </div>
+    </section>
+
+<section id="manifesto" class="section" style="border: 1px solid var(--red); padding: 50px; margin: 100px 0; background: rgba(10,0,0,0.5);">
+    <h2 class="latin" style="color: var(--red); font-size: 2em;">Against_The_Digital_Plague.</h2>
+    <div style="margin-top: 30px; line-height: 1.8; letter-spacing: 1px;">
+        <p>МЫ ПРЕЗИРАЕМ ЦИФРОВУЮ ВЫКЛАДКУ. СТРИМИНГИ — ЭТО КЛАДБИЩЕ ДУХА. МУЗЫКА ДОЛЖНА СУЩЕСТВОВАТЬ НА ФИЗИЧЕСКИХ НОСИТЕЛЯХ, КОТОРЫЕ МОЖНО СЖЕЧЬ ИЛИ ОСТАВИТЬ ГНИТЬ В ЗЕМЛЕ.</p>
+        <p style="margin-top: 20px;">SEP⸸IK CHAN⸸ — ЭТО НЕ КОММЕРЧЕСКАЯ ХУЙНЯ. МЫ НЕ ПРОДАЕМ "КОНТЕНТ". МЫ ТРАНСЛИРУЕМ РАСПАД. МЫ — ИСТИННЫЙ БЛЭК МЕТАЛ В ЕГО ПЕРВОЗДАННОЙ, ХОЛОДНОЙ И БЕЗЖАЛОСТНОЙ ФОРМЕ. БЕЗ КОМПРОМИССОВ. БЕЗ КЛИКОВ. БЕЗ ВАС.</p>
+        <p style="text-align: right; color: var(--red); font-weight: bold; margin-top: 30px;">[ NO_DIGITAL_SALVATION ]</p>
+    </div>
+</section>
+<section id="contact" class="section" style="background: #050505; border: 1px solid #111;">
+    <h2 style="font-size: 0.7em; letter-spacing: 5px; color: #444; text-align: center;">[ PATIENT_APPLICATION_FORM ]</h2>
+    <div style="max-width: 500px; margin: 40px auto;">
+        <p style="font-size: 0.6em; color: #666; margin-bottom: 20px;">ЗАПОЛНИТЕ ДАННЫЕ ДЛЯ ПОЛУЧЕНИЯ ДОСТУПА К КАНАЛУ 'THE HELL'. МЫ ВЫШЛЕМ КЛЮЧ, ЕСЛИ ВАША ПУСТОТА ДОСТАТОЧНО ГЛУБОКА.</p>
+        <form style="display: flex; flex-direction: column; gap: 15px;">
+            <input type="text" placeholder="NAME / ID" style="background: transparent; border: 1px solid #222; color: white; padding: 10px; font-family: 'Courier Prime';">
+            <input type="email" placeholder="EMAIL_FOR_ENCRYPTED_KEY" style="background: transparent; border: 1px solid #222; color: white; padding: 10px; font-family: 'Courier Prime';">
+            <textarea placeholder="WHY DO YOU SEEK THE VOID?" style="background: transparent; border: 1px solid #222; color: white; padding: 10px; font-family: 'Courier Prime'; height: 80px;"></textarea>
+            <button type="button" class="nav-link" style="border: 1px solid var(--red); color: var(--red);">[ SUBMIT_TO_SEP⸸IK ]</button>
+        </form>
+    </div>
+</section>
+</main>
+
+<div id="v-archive" class="full-page">
+    <button class="close-btn" onclick="closeVault('v-archive')">[ CLOSE_RECEPTACLE ]</button>
+    <div style="max-width:900px; margin:0 auto;">
+        <h2 class="latin glitch-text" style="text-align:center; font-size:4em;">Archives</h2>
+        <div class="report-box-vault"><h3>LOG_#001: THE_VOID</h3><p>Субъект перестал реагировать на свет. Только шум кассет SEP⸸IK CHAN⸸ вызывает импульс.</p></div>
+        <div class="report-box-vault"><h3>LOG_#088: PHANTOM_SIGNAL</h3><p>Стены палаты №07 начали транслировать аудио без источников питания.</p></div>
+    </div>
+</div>
+
+<div id="v-gallery" class="full-page">
+    <button class="close-btn" onclick="closeVault('v-gallery')">[ CLOSE_RECEPTACLE ]</button>
+    <div id="photo-grid-inner" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:20px;"></div>
+</div>
+
+<div id="v-lib" class="full-page">
+    <button class="close-btn" onclick="closeVault('v-lib')">[ CLOSE_RECEPTACLE ]</button>
+    <div style="max-width:900px; margin:0 auto;">
+        <h2 class="latin glitch-text" style="text-align:center; font-size:4em;">Librarivm</h2>
+        <div class="report-box-vault"><h3>ТОМАС ЛИГОТТИ</h3><p>[ ЗАГОВОР ПРОТИВ ЧЕЛОВЕЧЕСТВА ] - Анатомия кошмара бытия.</p></div>
+    </div>
+</div>
+
+<div id="v-grimoire" class="full-page">
+    <button class="close-btn" onclick="closeVault('v-grimoire')">[ CLOSE_RECEPTACLE ]</button>
+    <div style="max-width:900px; margin:0 auto; text-align:center;">
+        <h2 class="latin" style="font-size:4em; color:var(--red);">Maledictio</h2>
+        <div class="report-box-vault"><h3>LITANIA NIGRA</h3><p>"NIHIL SUM. NIHIL ERO. NIHIL VOLO."</p></div>
+    </div>
+</div>
+
+<div id="v-chat" class="full-page" style="display:none; background: #050000;">
+    <button class="close-btn" onclick="closeVault('v-chat')">[ EXIT_CELL ]</button>
+    <div class="content-wrap" style="text-align: center;">
+        <h2 class="latin" style="color: var(--red);">The_Cell</h2>
+        
+        <div id="chat-auth">
+            <p style="font-size: 0.8em; letter-spacing: 2px;">ENTER_ACCESS_KEY_RECEIVED_BY_MAIL</p>
+            <input type="password" id="chat-pass" style="background: black; border: 1px solid var(--red); color: var(--red); padding: 10px; text-align: center; margin-top: 20px; outline: none;">
+            <br><br>
+            <button onclick="checkChatPass()" class="nav-link" style="color: var(--red);">[ UNLOCK_CHANNEL ]</button>
+        </div>
+
+        <div id="chat-interface" style="display: none; border: 1px solid #111; padding: 20px; text-align: left; height: 400px; display: flex; flex-direction: column;">
+            <div id="messages" style="flex-grow: 1; overflow-y: auto; color: #555; font-size: 0.8em; margin-bottom: 20px;">
+                <p><span style="color: var(--red);">[SYS]:</span> CHANNEL_ENCRYPTED. WELCOME, ADEPT.</p>
+            </div>
+            <input type="text" placeholder="WRITE_TO_VOID..." style="background:transparent; border:none; border-top:1px solid #222; color:white; padding:10px; outline:none;">
+        </div>
+    </div>
+</div>
+<div class="vessels-monitor">
+    <div style="border-bottom:1px solid var(--dim); margin-bottom:8px; color:var(--red);">[ PATIENT_MONITOR ]</div>
+    <div id="vessel-list"></div>
+</div>
+
+<div id="v-cd-distro" class="full-page">
+    <button class="close-btn" onclick="closeVault('v-cd-distro')">[ EXIT_DISTRO ]</button>
+    <div class="content-wrap">
+        <h2 class="latin" style="text-align: center; color: #fff;">CD_&_Cassette_Stock</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px; margin-top: 60px;">
+            <div class="report-box-vault">
+                <div class="art-frame" style="height: 200px;"><img src="cd-art.jpg" alt="CD"></div>
+                <h3>SC-CD-01: INFECTED_VOICE</h3>
+                <p style="font-size: 0.7em; color: #555;">Jewel Case / 8-page Booklet</p>
+                <p style="margin-top: 15px;">PRICE: 10 EUR</p>
+                <a class="nav-link" href="mailto:order@email.com">[ ACQUIRE ]</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="v-vinyl-distro" class="full-page">
+    <button class="close-btn" onclick="closeVault('v-vinyl-distro')">[ EXIT_PLAS⸸IQVVM ]</button>
+    <div class="content-wrap">
+        <h2 class="latin" style="text-align: center; color: var(--red);">Plas⸸iqvvm_Archive</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; margin-top: 60px;">
+            <div class="report-box-vault" style="border-color: var(--bone);">
+                <div class="art-frame" style="height: 300px;"><img src="vinyl-art.jpg" alt="Vinyl"></div>
+                <h3 class="latin" style="font-size: 1.2em;">SC-LP-07: ANNIHILATION</h3>
+                <p style="font-size: 0.7em; color: #555;">12" Heavy Black Vinyl / Gatefold</p>
+                <p style="margin-top: 15px;">LIMITED TO 66 COPIES</p>
+                <a class="nav-link" href="mailto:order@email.com">[ ORDER_LP ]</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div id="v-library-vault" class="full-page">
+    <button class="close-btn" onclick="closeVault('v-library-vault')">[ EXIT_LIBRARIVM ]</button>
+    <div class="content-wrap">
+        <h2 class="latin glitch-text" style="text-align: center; font-size: 4em; color: var(--bone);">Librarivm_Prohibi⸸vm</h2>
+        <p style="text-align: center; color: #444; font-size: 0.8em; margin-bottom: 60px;">ИНДЕКС ТЕКСТОВ ДЛЯ ДЕСТАБИЛИЗАЦИИ РАЗУМА. СКАЧИВАНИЕ РАЗРЕШЕНО.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px;">
+            
+            <div class="report-box-vault" style="border-color: #333;">
+                <h3 class="latin" style="font-size: 1.5em; color: var(--bone);">Эмиль Чоран</h3>
+                <p style="color: #666; font-size: 0.7em; margin-bottom: 10px;">[ ГОРЬКИЕ СИЛЛОГИЗМЫ ]</p>
+                <p style="font-size: 0.8em; line-height: 1.4;">"Человек — это существо, которое может привыкнуть к чему угодно, даже к собственной гибели".</p>
+                <div style="margin-top: 20px;">
+                    <a href="path/to/book.pdf" download class="nav-link" style="font-size: 0.7em; border-color: #222;">[ DOWNLOAD_PDF ]</a>
+                </div>
+            </div>
+
+            <div class="report-box-vault" style="border-color: #333;">
+                <h3 class="latin" style="font-size: 1.5em; color: var(--bone);">Юлиус Эвола</h3>
+                <p style="color: #666; font-size: 0.7em; margin-bottom: 10px;">[ ОСЕДЛАТЬ ТИГРА ]</p>
+                <p style="font-size: 0.8em; line-height: 1.4;">Инструкция по выживанию в мире, где боги давно мертвы, а смыслы стерты.</p>
+                <div style="margin-top: 20px;">
+                    <a href="#" class="nav-link" style="font-size: 0.7em; border-color: #222;">[ DOWNLOAD_EPUB ]</a>
+                </div>
+            </div>
+
+            <div class="report-box-vault" style="border-color: #333;">
+                <h3 class="latin" style="font-size: 1.5em; color: var(--bone);">Ф. Мейнлендер</h3>
+                <p style="color: #666; font-size: 0.7em; margin-bottom: 10px;">[ ФИЛОСОФИЯ ОСВОБОЖДЕНИЯ ]</p>
+                <p style="font-size: 0.8em; line-height: 1.4;">Мир как результат самоубийства Бога. Чистый нигилизм в его абсолюте.</p>
+                <div style="margin-top: 20px;">
+                    <a href="#" class="nav-link" style="font-size: 0.7em; border-color: #222;">[ DOWNLOAD_PDF ]</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const hum = document.getElementById('terminal-hum');
+    const audioBtn = document.getElementById('audio-ctrl');
+
+    function toggleAudio() {
+        if (hum.paused) { hum.play(); hum.volume = 0.02; audioBtn.innerText = '[ AUDIO: ON ]'; audioBtn.style.color = '#600'; }
+        else { hum.pause(); audioBtn.innerText = '[ AUDIO: OFF ]'; audioBtn.style.color = '#333'; }
+    }
+
+    function openVault(id) { document.getElementById(id).style.display = 'block'; document.body.style.overflow = 'hidden'; if(hum.paused) toggleAudio(); }
+    function closeVault(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+    const vesselNames = ["PATIENT_#07", "VOID_WALKER", "NIL_ENTITY", "ECHO_CORPSE", "GHOST_INT"];
+    function updateVessels() {
+        const vList = document.getElementById('vessel-list');
+        if(!vList) return;
+        vList.innerHTML = '';
+        vesselNames.forEach(name => {
+            const isActive = Math.random() > 0.3;
+            vList.innerHTML += `<div class="vessel-row ${isActive ? 'active' : ''}"><span>${name}</span><span>${isActive ? 'LIVE' : 'DEAD'}</span></div>`;
+        });
+    }
+    setInterval(updateVessels, 3000);
+    updateVessels();
+
+    window.onload = () => {
+        const gallery = document.getElementById('photo-grid-inner');
+        if(gallery) {
+            for(let i = 1; i <= 40; i++) {
+                gallery.innerHTML += `<div style="border:1px solid #222; padding:10px; background:#050505;"><div style="height:150px; background:#111; display:flex; align-items:center; justify-content:center; color:#333; font-size:10px;">SCAN_#${i}</div></div>`;
+            }
+        }
+        document.getElementById('grim-intro').classList.add('type-active');
+    };
+
+const whispers = [
+    "ТЫ ВСЕ ЕЩЕ ЗДЕСЬ?",
+    "СЕКТОР 07 НАБЛЮДАЕТ ЗА ТОБОЙ.",
+    "ЗВУК — ЭТО ЕДИНСТВЕННАЯ РЕАЛЬНОСТЬ.",
+    "ТВОЯ ЛИЧНОСТЬ УДАЛЕНА НА 87%.",
+    "СЛЫШИШЬ ЛИ ТЫ ТИШИНУ?",
+    "ОНИ НЕ ПРИДУТ ТЕБЕ НА ПОМОЩЬ.",
+    "ПУСТОТА ТЕРПЕЛИВА.",
+    "СТАНЬ ЧАСТЬЮ ШУМА."
+];
+
+function triggerWhisper() {
+    const whisperBox = document.getElementById('void-whisper');
+    if (!whisperBox) return;
+
+    // Обираємо випадкову фразу
+    const text = whispers[Math.floor(Math.random() * whispers.length)];
+    whisperBox.innerText = `[ ${text} ]`;
+
+    // Показуємо повідомлення
+    whisperBox.style.opacity = '1';
+
+    // Ховаємо через 4 секунди
+    setTimeout(() => {
+        whisperBox.style.opacity = '0';
+    }, 4000);
+
+    // Плануємо наступну появу (від 15 до 40 секунд)
+    const nextInterval = Math.random() * (40000 - 15000) + 15000;
+    setTimeout(triggerWhisper, nextInterval);
+}
+
+// Запускаємо через 10 секунд після завантаження
+setTimeout(triggerWhisper, 10000);
+
+    function systemCrash() {
+    const noise = document.getElementById('noise-overlay');
+    const main = document.getElementById('main-view');
+    
+    // Вмикаємо шум та тряску
+    noise.style.opacity = '0.3';
+    document.body.classList.add('crash-shake');
+    
+    // Звуковий ефект збою (різко підвищуємо гучність фону на мить)
+    const hum = document.getElementById('terminal-hum');
+    if (hum) hum.volume = 0.8;
+
+    setTimeout(() => {
+        // Вимикаємо через 0.5 секунди
+        noise.style.opacity = '0';
+        document.body.classList.remove('crash-shake');
+        if (hum) hum.volume = 0.2;
+    }, 500);
+}
+
+// Прив'язуємо збій до кнопки ACCESS_DENIED (якщо вона у тебе є) або до випадкових інтервалів
+setInterval(() => {
+    if (Math.random() > 0.95) { // 5% шанс збою кожні 10 секунд
+        systemCrash();
+    }
+}, 10000);
+
+// Можна додати виклик systemCrash() у функцію openVault, щоб вхід у палату супроводжувався глюком
+
+let ritualTimer;
+let isRitualActive = false;
+
+window.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'x' && !isRitualActive) {
+        ritualTimer = setTimeout(startRitual, 3000); // Потрібно тримати 3 секунди
+    }
+});
+
+window.addEventListener('keyup', (e) => {
+    if (e.key.toLowerCase() === 'x') {
+        clearTimeout(ritualTimer);
+    }
+});
+
+function startRitual() {
+    isRitualActive = true;
+    const hum = document.getElementById('terminal-hum');
+    
+    // Візуальний хаос
+    document.body.style.transition = "2s";
+    document.body.style.backgroundColor = "#400"; // Темно-кривавий
+    document.getElementById('noise-overlay').style.opacity = "0.6";
+    
+    // Сповільнюємо музику
+    if (hum) {
+        hum.playbackRate = 0.5; // Уповільнення в 2 рази (буде дуже похмуро)
+        hum.volume = 0.5;
+    }
+
+    // З'являється секретне повідомлення на весь екран
+    const ritualDiv = document.createElement('div');
+    ritualDiv.style = "position:fixed; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:black; z-index:10000; color:white; font-family:'UnifrakturMaguntia'; font-size:5vw;";
+    ritualDiv.innerHTML = "TRUE_BLACK_METAL_NEVER_DIES";
+    document.body.appendChild(ritualDiv);
+
+    setTimeout(() => {
+        ritualDiv.remove();
+        // Можна або лишити сайт червоним, або повернути як було через 10 сек
+    }, 5000);
+}
+function checkChatPass() {
+    const pass = document.getElementById('chat-pass').value;
+    const correctPass = "SEP7IK2026"; // Твій пароль, який ти шлеш на пошту
+
+    if (pass === correctPass) {
+        document.getElementById('chat-auth').style.display = 'none';
+        document.getElementById('chat-interface').style.display = 'block';
+        systemCrash(); // Глюк при успішному вході
+    } else {
+        alert("ACCESS_DENIED. WRONG_KEY.");
+        systemCrash(); // Глюк при помилці
+    }
+
+        // У функції startBootSequence змініть фінал:
+}  {
+    clearInterval(interval);
+    setTimeout(() => {
+        const screen = document.getElementById('boot-screen');
+        screen.style.transition = "3s"; // Повільне зникнення
+        screen.style.opacity = '0';
+        
+        // Видаляємо з DOM після зникнення
+        setTimeout(() => { screen.style.display = 'none'; }, 3000);
+    }, 1500);
+}
+    
+// --- БАЗА ДАНИХ (РЕДАГУЙ ТУТ) ---
+
+const tapesData = [
+    { title: "SC-T-01: FOREST_VOID", desc: "PRO-DONE TAPE / WHITE SHELL", price: "7 EUR", link: "mailto:order@email.com", img: "https://via.placeholder.com/300x400/000/fff?text=TAPE_01" },
+    { title: "SC-T-02: INFECTED_BLOOD", desc: "BLACK TAPE / LIMITED 15", price: "8 EUR", link: "mailto:order@email.com", img: "https://via.placeholder.com/300x400/000/fff?text=TAPE_02" }
+];
+
+const vinylData = [
+    { title: "SC-LP-07: ETERNAL_NULL", desc: "12' BLACK WAX / GATEFOLD", price: "25 EUR", link: "mailto:order@email.com", img: "https://via.placeholder.com/400x400/000/fff?text=LP_01" }
+];
+
+const booksData = [
+    { author: "EMIL_CIORAN", title: "ГОРЬКИЕ СИЛЛОГИЗМЫ", link: "#", type: "PDF" },
+    { author: "PHILIPP_MAINLANDER", title: "ФИЛОСОФИЯ ОСВОБОЖДЕНИЯ", link: "#", type: "PDF" },
+    { author: "JULIUS_EVOLA", title: "ОСЕДЛАТЬ ТИГРА", link: "#", type: "EPUB" }
+];
+
+// --- ЛОГІКА СИСТЕМИ (НЕ ЧІПАЙ) ---
+
+function renderContent() {
+    // Рендерим Касети
+    const tapeContainer = document.querySelector('#v-cd .content-grid') || document.querySelector('#v-cd');
+    tapeContainer.innerHTML = '<button class="close-btn" onclick="closeVault(\'v-cd\')">EXIT</button><h2 class="latin" style="font-size: 4em;">Tape_&_CD_Vault</h2><div class="grid-layout" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap:30px; margin-top:50px;">' + 
+    tapesData.map(item => `
+        <div class="report-box-vault">
+            <div style="height:200px; background:#111; overflow:hidden;"><img src="${item.img}" style="width:100%; height:100%; object-fit:cover; opacity:0.5;"></div>
+            <h3 style="font-size:0.9em; margin-top:15px;">${item.title}</h3>
+            <p style="font-size:0.7em; color:#555;">${item.desc}</p>
+            <p style="color:var(--red); margin:10px 0;">${item.price}</p>
+            <a href="${item.link}" class="nav-link" style="border:1px solid #333; padding:5px 10px; display:inline-block;">[ ACQUIRE ]</a>
+        </div>
+    `).join('') + '</div>';
+
+    // Рендерим Вініл
+    const vinylContainer = document.querySelector('#v-vinyl');
+    vinylContainer.innerHTML = '<button class="close-btn" onclick="closeVault(\'v-vinyl\')">EXIT</button><h2 class="latin" style="font-size: 4em; color:var(--red);">Plas⸸iqvvm_Archive</h2><div class="grid-layout" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap:30px; margin-top:50px;">' + 
+    vinylData.map(item => `
+        <div class="report-box-vault" style="border-color:var(--bone);">
+            <div style="height:250px; background:#111; overflow:hidden;"><img src="${item.img}" style="width:100%; height:100%; object-fit:cover; opacity:0.6;"></div>
+            <h3 class="latin" style="font-size:1.2em; margin-top:15px;">${item.title}</h3>
+            <p style="font-size:0.7em; color:#555;">${item.desc}</p>
+            <p style="color:var(--bone); margin:10px 0;">${item.price}</p>
+            <a href="${item.link}" class="nav-link" style="border:1px solid var(--bone); padding:5px 10px; display:inline-block;">[ ORDER_LP ]</a>
+        </div>
+    `).join('') + '</div>';
+    
+    // Рендерим Бібліотеку
+    const libContainer = document.querySelector('#v-lib');
+    libContainer.innerHTML = '<button class="close-btn" onclick="closeVault(\'v-lib\')">EXIT</button><h2 class="latin" style="font-size: 4em; color: var(--red); text-align: center; margin-bottom: 80px;">INDEX_LIBRARIVM</h2>' + 
+    booksData.map(book => `
+        <div class="catalog-row" style="display:flex; align-items:baseline; gap:15px; margin-bottom:25px;">
+            <span class="latin" style="font-size: 1.5em; min-width:200px;">${book.author}</span>
+            <span style="flex-grow:1; border-bottom:1px dotted #444;"></span>
+            <span style="color:#666;">[ ${book.title} ]</span>
+            <a href="${book.link}" download style="color:var(--red); border:1px solid var(--red); padding:2px 10px; text-decoration:none; font-size:0.8em;">${book.type}</a>
+        </div>
+    `).join('');
+}
+
+// Запуск при завантаженні
+window.onload = () => {
+    runBoot(); // Твоя анімація завантаження
+    renderContent(); // Малюємо товари
+};
+
+</script>
+</body>
+</html>
