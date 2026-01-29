@@ -671,7 +671,7 @@ function checkChatPass() {
 
         // У функції startBootSequence змініть фінал:
 }  {
-    clearInterval(interval);
+    
     setTimeout(() => {
         const screen = document.getElementById('boot-screen');
         screen.style.transition = "3s"; // Повільне зникнення
@@ -706,73 +706,70 @@ const booksData = [
 // --- ЛОГІКА СИСТЕМИ (НЕ ЧІПАЙ) ---
 
 function renderContent() {
-    console.log("Starting render..."); // Це покаже в консолі, що скрипт ожив
-    
-    const bookContainer = document.querySelector('#v-library .content-grid') || document.querySelector('#v-library');
+    console.log("Initiating universal render...");
+
+    // 1. БОКС ДЛЯ КАСЕТ (DISTRO)
+    const tapeContainer = document.getElementById('tape-container') || document.querySelector('#v-cd-distro .content-wrap div[style*="grid"]');
+    if (tapeContainer) {
+        tapeContainer.innerHTML = ''; 
+        tapesData.forEach(item => {
+            tapeContainer.innerHTML += `
+                <div class="report-box-vault">
+                    <div class="art-frame" style="height:200px;"><img src="${item.img}" style="width:100%; filter:grayscale(1);"></div>
+                    <h3 style="font-size:0.9em; margin-top:15px;">${item.title}</h3>
+                    <p style="font-size:0.7em; color:#555;">${item.desc}</p>
+                    <p style="color:var(--red); margin:10px 0;">${item.price}</p>
+                    <a href="${item.link}" class="nav-link" style="border:1px solid #333; padding:5px 10px; display:inline-block;">[ ORDER ]</a>
+                </div>`;
+        });
+    }
+
+    // 2. БОКС ДЛЯ ВІНІЛУ (PLASTIQVVM)
+    const vinylContainer = document.getElementById('vinyl-container') || document.querySelector('#v-vinyl-distro .content-wrap div[style*="grid"]');
+    if (vinylContainer) {
+        vinylContainer.innerHTML = '';
+        vinylData.forEach(item => {
+            vinylContainer.innerHTML += `
+                <div class="report-box-vault" style="border-color: var(--bone);">
+                    <div class="art-frame" style="height:300px;"><img src="${item.img}" style="width:100%; filter:grayscale(1);"></div>
+                    <h3 class="latin" style="font-size:1.2em;">${item.title}</h3>
+                    <p style="font-size:0.7em; color:#555;">${item.desc}</p>
+                    <p style="margin-top:15px; color:var(--red);">${item.price}</p>
+                    <a href="${item.link}" class="nav-link" style="border:1px solid var(--red);">[ ORDER_LP ]</a>
+                </div>`;
+        });
+    }
+
+    // 3. БОКС ДЛЯ БІБЛІОТЕКИ (LIBRARIVM)
+    const bookContainer = document.getElementById('book-container') || document.querySelector('#v-library-vault .content-wrap div[style*="grid"]');
     if (bookContainer) {
-        bookContainer.innerHTML = '<button class="close-btn" onclick="closeVault(\'v-library\')">X EXIT [_LIBRARIVM_]</button><h1 class="librarium-title">Librarium_Prohibi⸸vm</h1>';
-        
+        bookContainer.innerHTML = '';
         booksData.forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'book-card';
-            div.innerHTML = `
-                <h2 class="book-author">${item.author}</h2>
-                <p class="book-tag">[ ${item.title} ]</p>
-                <a href="${item.link}" class="download-btn">[ DOWNLOAD_${item.type} ]</a>
-            `;
-            bookContainer.appendChild(div);
+            bookContainer.innerHTML += `
+                <div class="report-box-vault" style="border-color: #333;">
+                    <h3 class="latin" style="font-size: 1.5em; color: var(--bone);">${item.author}</h3>
+                    <p style="color: #666; font-size: 0.7em; margin-bottom: 10px;">[ ${item.title} ]</p>
+                    <p style="font-size: 0.8em; line-height: 1.4;">${getQuote(item.author)}</p>
+                    <div style="margin-top: 20px;">
+                        <a href="${item.link}" class="nav-link" style="font-size: 0.7em; border-color: #222;">[ DOWNLOAD_${item.type} ]</a>
+                    </div>
+                </div>`;
         });
     }
 }
-document.addEventListener('DOMContentLoaded', renderContent);
-    // Рендерим Касети
-    const tapeContainer = document.querySelector('#v-cd .content-grid') || document.querySelector('#v-cd');
-    if (tapeContainer) {
-        tapeContainer.innerHTML = '<button class="close-btn" onclick="closeVault(\'v-cd\')">X EXIT [_LIBRARIVM_]</button><h2 class="latin">DISTRIBUTION</h2>';
-        tapesData.forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'report-box-vault';
-            div.innerHTML = `
-                <div style="height:200px; background:#111; overflow:hidden;"><img src="${item.img}" style="width:100%; height:auto; filter:grayscale(1);"></div>
-                <h3 style="font-size:0.9em; margin-top:15px;">${item.title}</h3>
-                <p style="font-size:0.7em; color:#555;">${item.desc}</p>
-                <p style="color:var(--red); margin:10px 0;">${item.price}</p>
-                <a href="${item.link}" class="nav-link" style="border:1px solid #333; padding:5px 10px; display:inline-block;">ORDER</a>
-            `;
-            tapeContainer.appendChild(div);
-        });
-    }
 
-    // Рендерим Бібліотеку (Книги)
-    const bookContainer = document.querySelector('#v-library .content-grid') || document.querySelector('#v-library');
-    if (bookContainer) {
-        bookContainer.innerHTML = '<button class="close-btn" onclick="closeVault(\'v-library\')">X EXIT [_LIBRARIVM_]</button><h1 class="librarium-title">Librarium_Prohibi⸸vm</h1><p class="librarium-subtitle">ИНДЕКС ТЕКСТОВ ДЛЯ ДЕСТАБИЛИЗАЦИИ РАЗУМА. СКАЧИВАНИЕ РАЗРЕШЕНО.</p>';
-        booksData.forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'book-card';
-            div.innerHTML = `
-                <h2 class="book-author">${item.author}</h2>
-                <p class="book-tag">[ ${item.title} ]</p>
-                <p class="book-quote">"${getQuote(item.author)}"</p>
-                <a href="${item.link}" class="download-btn">[ DOWNLOAD_${item.type} ]</a>
-            `;
-            bookContainer.appendChild(div);
-        });
-    }
-
-
-// Допоміжна функція для цитат (щоб блоки не були порожніми)
+// Допоміжна функція для цитат
 function getQuote(author) {
     const quotes = {
-        "EMIL_CIORAN": "ЧЕЛОВЕК — ЭТО СУЩЕСТВО, КОТОРОЕ МОЖЕТ ПРИВЫКНУТЬ К ЧЕМУ УГОДНО, ДАЖЕ К СОБСТВЕННОЙ ГИБЕЛИ.",
-        "PHILIPP_MAINLANDER": "МИР КАК РЕЗУЛЬТАТ САМОУБИЙСТВА БОГА. ЧИСТЫЙ НИГИЛИЗМ В ЕГО АБСОЛЮТЕ.",
-        "JULIUS_EVOLA": "ИНСТРУКЦИЯ ПО ВЫЖИВАНИЮ В МИРЕ, ГДЕ БОГИ ДАВНО МЕРТВЫ, А СМЫСЛЫ СТЕРТЫ.",
-        "GUSTAV_MEYRINK": "ЗНАНИЕ — ЭТО ТЕНЬ, КОТОРУЮ ОТБРАСЫВАЕТ СВЕТ ВЕЧНОСТИ."
+        "EMIL_CIORAN": "ЧЕЛОВЕК — ЭТО СУЩЕСТВО, КОТОРОЕ МОЖЕТ ПРИВЫКНУТЬ К ЧЕМУ УГОДНО.",
+        "PHILIPP_MAINLANDER": "МИР КАК РЕЗУЛЬТАТ САМОУБИЙСТВА БОГА.",
+        "JULIUS_EVOLA": "ВЫЖИВАНИЕ В МИРЕ, ГДЕ БОГИ ДАВНО МЕРТВЫ.",
+        "GUSTAV_MEYRINK": "ЗНАНИЕ — ЭТО ТЕНЬ, КОТОРУЮ ОТБРАСЫВАЕТ СВЕТ."
     };
     return quotes[author] || "ВЕЧНОЕ НИЧТО ОЖИДАЕТ ТЕБЯ.";
 }
 
-// Запуск рендерингу після завантаження
+// ЗАПУСК СИСТЕМИ
 document.addEventListener('DOMContentLoaded', renderContent);
 
 </script>
