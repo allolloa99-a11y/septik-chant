@@ -613,40 +613,6 @@ function triggerWhisper() {
     setTimeout(triggerWhisper, nextInterval);
 }
 
-// Запускаємо через 10 секунд після завантаження
-setTimeout(triggerWhisper, 10000);
-
-    function systemCrash() {
-    const noise = document.getElementById('noise-overlay');
-    const main = document.getElementById('main-view');
-    
-    // Вмикаємо шум та тряску
-    noise.style.opacity = '0.3';
-    document.body.classList.add('crash-shake');
-    
-    // Звуковий ефект збою (різко підвищуємо гучність фону на мить)
-    const hum = document.getElementById('terminal-hum');
-    if (hum) hum.volume = 0.8;
-
-    setTimeout(() => {
-        // Вимикаємо через 0.5 секунди
-        noise.style.opacity = '0';
-        document.body.classList.remove('crash-shake');
-        if (hum) hum.volume = 0.2;
-    }, 500);
-}
-
-// Прив'язуємо збій до кнопки ACCESS_DENIED (якщо вона у тебе є) або до випадкових інтервалів
-setInterval(() => {
-    if (Math.random() > 0.95) { // 5% шанс збою кожні 10 секунд
-        systemCrash();
-    }
-}, 10000);
-
-// Можна додати виклик systemCrash() у функцію openVault, щоб вхід у палату супроводжувався глюком
-
-let ritualTimer;
-let isRitualActive = false;
 
 window.addEventListener('keydown', (e) => {
     if (e.key.toLowerCase() === 'x' && !isRitualActive) {
