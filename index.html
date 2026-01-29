@@ -224,6 +224,27 @@
 
         <section id="distro" class="section" style="border-top: 1px solid var(--bone);">
     <span class="latin">Distro.</span>
+    
+    <div class="release-card" style="margin-top: 50px;">
+        <div class="art-frame">
+            <img src="https://via.placeholder.com/400x600/000/fff?text=RAW_TAPE_01" alt="Tape">
+        </div>
+        <div class="info-block">
+            <h3 class="latin" style="font-size: 1.5em;">SC-001: VOID_RESONANCE</h3>
+            <p style="color: var(--red); font-weight: bold;">[ LIMITED TO 07 COPIES ]</p>
+            <p style="margin-top: 20px; color: #666;">RAW BLACK METAL / AMBIENT. ЗАПИСАНО НА ИСПОЛЬЗОВАННЫЕ ПЛЕНКИ ИЗ ПСИХИАТРИЧЕСКОЙ БОЛЬНИЦЫ.</p>
+            <p style="margin-top: 20px;">PRICE: 6.66 EUR / TRADE ONLY</p>
+            <br>
+            <a onclick="openVault('v-chat')" class="nav-link" style="color: var(--red);">[ JOIN_THE_CELL ]</a>
+            <a class="nav-link" href="mailto:your@email.com" style="border: 1px solid var(--red);">[ ORDER_VIA_MAIL ]</a>
+        </div>
+    </div>
+</section> ```
+
+**Порада:** Якщо ти використовуєш `renderContent()` для автоматичного виводу, переконайся, що в масиві `tapesData` (в кінці коду) вказані правильні дані, інакше контейнер буде порожнім.
+
+Чи підказати, як налаштувати масив у скрипті, щоб не писати кожну картку вручну в HTML?
+    <span class="latin">Distro.</span>
     <div class="release-card" style="margin-top: 50px;">
         <div class="art-frame">
             <img src="https://via.placeholder.com/400x600/000/fff?text=RAW_TAPE_01" alt="Tape">
@@ -241,7 +262,7 @@
 
 
     
-<main id="main-view" style="padding: 60px;">
+
 
     <section class="section" style="margin-bottom: 80px; border-bottom: 1px solid var(--dim); padding-bottom: 60px;">
         <div style="display: flex; justify-content: space-between; align-items: flex-start;">
@@ -282,7 +303,7 @@
         <p style="margin-top: 20px; letter-spacing: 2px;">TRUE BLACK METAL NEVER DIES // PHYSICAL SUPREMACY</p>
     </section>
 
-</main>
+
     
         <section id="vinyl" class="section">
     <span class="latin">Plas⸸iqvvm.</span>
@@ -658,28 +679,14 @@ function startRitual() {
 }
 function checkChatPass() {
     const pass = document.getElementById('chat-pass').value;
-    const correctPass = "SEP7IK2026"; // Твій пароль, який ти шлеш на пошту
+    const correctPass = "SEP7IK2026"; 
 
     if (pass === correctPass) {
         document.getElementById('chat-auth').style.display = 'none';
         document.getElementById('chat-interface').style.display = 'block';
-        systemCrash(); // Глюк при успішному вході
     } else {
         alert("ACCESS_DENIED. WRONG_KEY.");
-        systemCrash(); // Глюк при помилці
     }
-
-        // У функції startBootSequence змініть фінал:
-}  {
-    
-    setTimeout(() => {
-        const screen = document.getElementById('boot-screen');
-        screen.style.transition = "3s"; // Повільне зникнення
-        screen.style.opacity = '0';
-        
-        // Видаляємо з DOM після зникнення
-        setTimeout(() => { screen.style.display = 'none'; }, 3000);
-    }, 1500);
 }
     
 // --- БАЗА ДАНИХ (РЕДАГУЙ ТУТ) ---
@@ -771,6 +778,8 @@ function getQuote(author) {
 
 // ЗАПУСК СИСТЕМИ
 document.addEventListener('DOMContentLoaded', renderContent);
+
+
 
 </script>
 </body>
