@@ -9,6 +9,7 @@
     <meta name="robots" content="index, follow">
     <meta name="description" content="RAW BLACK METAL // HELVETE VEKTOR // SEPTIK CHANT ARCHIVES">
 <meta name="theme-color" content="#050505"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEP⸸IK CHAN⸸ | NO SALVATION</title>
     <link rel="icon" href="SC.jpg" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
@@ -393,6 +394,137 @@ body, .full-page {
     cursor: text;
 }
 
+/* Адаптив для мобільних пристроїв */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Головна навігація: в один стовпчик */
+    .terminal-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        padding: 20px 0;
+    }
+
+    /* 2. Контейнери (Вініл, Касети): в одну колонку */
+    #vinyl-container, #tape-container, #clinical-container {
+        grid-template-columns: 1fr !important; /* Тільки один предмет в рядку */
+        gap: 20px !important;
+        padding: 10px;
+    }
+
+    /* 3. Звіти (Report Boxes): адаптація розмірів */
+    .report-box-vault {
+        flex-direction: column !important; /* Картинка зверху, текст знизу */
+        text-align: center;
+        height: auto !important;
+        padding: 15px !important;
+    }
+
+    .art-frame {
+        width: 100% !important;
+        max-width: 250px;
+        height: 250px !important;
+        margin: 0 auto 15px auto !important;
+    }
+
+    /* 4. Шрифти: зменшуємо гігантські заголовки */
+    h2.latin {
+        font-size: 1.8em !important;
+    }
+
+    /* 5. Панель керування (Пошук/Фільтри) */
+    .vault-controls {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .search-group {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    input, select {
+        width: 100% !important;
+    }
+
+    /* 6. Плеєр у футері */
+    .audio-controls {
+        padding: 15px 5px !important;
+    }
+    
+    .audio-controls-wrap {
+        width: 100% !important;
+        gap: 10px !important;
+    }
+
+    /* 7. Форма [ PATIENT_APPLICATION ] */
+    form, .ritual-container {
+        padding: 20px !important;
+        width: 95% !important;
+        margin: 0 auto;
+    }
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+    /* Базовый стиль гамбургера */
+.hamburger {
+    display: none; /* Скрыт на ПК */
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    z-index: 1001;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.8);
+    border: 1px solid var(--red);
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--red);
+    transition: 0.3s;
+}
+
+/* Стили для мобилок (внутри твоего @media screen and (max-width: 768px)) */
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: flex; /* Показываем на мобилке */
+    }
+
+    .terminal-nav {
+        display: none; /* Прячем меню по умолчанию */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(5, 5, 5, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        gap: 30px;
+    }
+
+    /* Когда меню открыто (добавим этот класс через JS) */
+    .terminal-nav.active {
+        display: flex;
+    }
+
+    .terminal-nav .nav-link {
+        font-size: 1.5em; /* Делаем ссылки крупнее для пальцев */
+    }
+}
+
     </style>
 </head>
 
@@ -445,6 +577,13 @@ body, .full-page {
     <span onclick="openVault('v-black-market')" class="nav-link">[ BLACK_MARKET_LIST ]</span>
     <span onclick="openVault('v-propaganda')" class="nav-link">[ PROPAGANDA_CORPS ]</span>
     </nav>
+
+    <div class="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
 </header>
 
 <main>
@@ -1920,6 +2059,37 @@ function openVault(id) {
         if (id === 'v-black-market') renderBlackMarket();
         if (id === 'v-clinical-vault') renderClinical();
         // ... решта розділів
+    }
+}
+function toggleMenu() {
+    const nav = document.querySelector('.terminal-nav');
+    nav.classList.toggle('active');
+    
+    // Опционально: анимация самих полосок в "крестик"
+    const burger = document.querySelector('.hamburger');
+    burger.classList.toggle('open');
+}
+
+// Чтобы при клике на ссылку меню само закрывалось
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelector('.terminal-nav').classList.remove('active');
+    });
+});
+
+function openVault(id) {
+    // Закрываем мобильное меню при открытии любого раздела
+    document.querySelector('.terminal-nav').classList.remove('active');
+    
+    const vault = document.getElementById(id);
+    if (vault) {
+        vault.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        // Твои рендеры (renderVinyl, renderClinical и т.д.)
+        if (id === 'v-vinyl-distro') renderVinyl();
+        if (id === 'v-clinical-vault') renderClinical();
+        if (id === 'v-black-market') renderBlackMarket();
     }
 }
 
