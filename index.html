@@ -171,6 +171,225 @@
     50% { opacity: 0.3; filter: drop-shadow(0 0 20px var(--red)); }
 }
 
+/* Toolbar у стилі термінала */
+.vault-controls {
+    display: flex;
+    justify-content: space-between; /* Кнопки вправо! */
+    align-items: center;
+    background: #0a0a0a;
+    border: 1px solid #222;
+    padding: 15px 20px;
+    margin-bottom: 30px;
+}
+
+.search-group input, .search-group select {
+    background: #000;
+    border: 1px solid #333;
+    color: var(--bone);
+    padding: 5px 10px;
+    font-family: monospace;
+    outline: none;
+}
+
+.view-toggle button {
+    background: #000;
+    border: 1px solid #333;
+    color: #444;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-size: 0.7em;
+}
+
+.view-toggle button.active {
+    color: var(--red);
+    border-color: var(--red);
+}
+
+/* Картки: фіксуємо заголовок, щоб не пливло */
+.report-box-vault h3 {
+    font-size: 1.1em !important; 
+    margin: 10px 0 !important;
+    font-family: 'Old English Text MT', serif; /* Твій стиль */
+    line-height: 1;
+}
+
+/* Режим списку (жорсткий фікс) */
+.list-mode {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+}
+
+.item-list-mode {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    height: 70px !important;
+    padding: 5px 15px !important;
+}
+
+.item-list-mode .art-frame {
+    width: 50px !important;
+    height: 50px !important;
+    margin: 0 20px 0 0 !important;
+}
+.vault-controls {
+    display: flex;
+    justify-content: space-between; /* Розносить пошук і кнопки по краях */
+    align-items: center;
+    border: 1px solid #111;
+    background: rgba(5, 5, 5, 0.8);
+    padding: 10px 20px;
+    border-left: 3px solid var(--red);
+}
+
+.search-group input, .search-group select {
+    background: #000;
+    border: 1px solid #222;
+    color: var(--bone);
+    padding: 8px;
+    font-family: 'Courier New', monospace;
+}
+
+.view-toggle button {
+    background: none;
+    border: 1px solid #222;
+    color: #333;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.view-toggle button.active {
+    color: var(--red);
+    border-color: var(--red);
+}
+body, .full-page {
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), 
+                url('unnamed.jpg') fixed no-repeat center center !important;
+    background-size: cover !important;
+}
+
+/* Жорстке закріплення панелі плеєра внизу */
+.audio-controls {
+    /* Прибираємо fixed, щоб вони не літали по всьому сайту */
+    position: relative; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px; /* Відступ від форми або тексту зверху */
+    padding: 20px 0;
+    border-top: 1px solid #111;
+    background: transparent;
+    z-index: 5;
+}
+
+/* Налаштування окремих кнопок, щоб не розліталися */
+.audio-controls button, 
+.audio-controls .vol-ctrl {
+    background: none;
+    border: none;
+    color: var(--bone);
+    font-family: monospace;
+    font-size: 0.7em;
+    cursor: pointer;
+    margin: 0 15px;
+}
+
+.trumpet-cell {
+    border: 1px solid #111;
+    padding: 20px 10px;
+    background: rgba(5, 5, 5, 0.5);
+    transition: 0.5s;
+    filter: grayscale(1);
+    opacity: 0.3;
+}
+
+.trumpet-cell.active {
+    border-color: var(--red);
+    filter: grayscale(0);
+    opacity: 1;
+    box-shadow: inset 0 0 15px rgba(255, 0, 0, 0.1);
+}
+
+.trumpet-icon {
+    font-family: 'Old English Text MT', serif;
+    font-size: 2.5em;
+    color: var(--red);
+    margin-bottom: 10px;
+}
+
+.trumpet-text {
+    font-family: monospace;
+    font-size: 0.6em;
+    letter-spacing: 2px;
+}
+
+.trumpet-cell:hover {
+    background: rgba(255, 0, 0, 0.05);
+    transform: translateY(-5px);
+}
+
+    .dos-list {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+    color: #666;
+    line-height: 1.6;
+    background: rgba(5,5,5,0.8);
+    padding: 20px;
+    border: 1px solid #111;
+    white-space: pre-wrap; /* Зберігає форматування тексту */
+}
+
+        .prop-block {
+    background: rgba(10, 10, 10, 0.5);
+    padding: 20px;
+    border-left: 1px solid #333;
+}
+
+.download-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    font-size: 0.7em;
+    color: #666;
+}
+
+.download-item .nav-link {
+    color: var(--red);
+    border: 1px solid #222;
+    padding: 3px 8px;
+}
+
+.download-item .nav-link:hover {
+    background: var(--red);
+    color: #000;
+}
+
+.ritual-container p {
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.2);
+}
+
+#v-submission .nav-link:hover {
+    background: var(--red);
+    color: #000 !important;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+}
+
+.trade-rules li {
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #111;
+    padding-bottom: 5px;
+}
+
+.trade-template pre {
+    user-select: all; /* Дозволяє виділити весь шаблон одним кліком */
+    cursor: text;
+}
+
     </style>
 </head>
 
@@ -203,8 +422,8 @@
 <div class="blood-stream right"></div>
 <div class="scanner-line"></div>
 
-<div class="audio-trigger" id="audio-ctrl" onclick="toggleAudio()" style="position:fixed; top:40px; right:40px; z-index:5000; cursor:pointer; font-size:0.7em; color:#333;">[ INITIATE_AUDIO_FEED ]</div>
-<audio id="terminal-hum" loop><source src="01. Freezing Moon.mp3" type="audio/mpeg"></audio>
+
+<audio id="terminal-hum" loop><source src="" type="audio/mpeg"></audio>
 
 <header>
     <div class="logo">SEP⸸IK CHAN⸸</div>
@@ -215,6 +434,13 @@
         <a href="#dogma" class="nav-link">[ DOGMA ]</a>
         <a href="#lib" class="nav-link">[ LIBRARIVM ]</a>
         <a onclick="openVault('v-archive')" class="nav-link" style="color:var(--bone);">[ OPEN_VAULT ]</a>
+        <a onclick="openVault('v-spo7ify')" class="nav-link" style="color:var(--red);">[ AUDIO_ARCHIVE ]</a>  
+    <span onclick="openVault('v-clinical-vault')" class="nav-link">[ CLINICAL_RECORDS ]</span>
+    <span onclick="openVault('v-trumpets')" class="nav-link">[ SEVEN_TRUMPETS ]</span>
+    <span onclick="openVault('v-transmission')" class="nav-link">[ TRANSMISSION_NODES ]</span>
+    <span onclick="openVault('v-submission')" class="nav-link">[ SUBMISSION_RITUAL ]</span>
+    <span onclick="openVault('v-black-market')" class="nav-link">[ BLACK_MARKET_LIST ]</span>
+    <span onclick="openVault('v-propaganda')" class="nav-link">[ PROPAGANDA_CORPS ]</span>
     </nav>
 </header>
 
@@ -354,21 +580,16 @@
         </div>
     </section>
 
-    <section id="dogma" class="section" style="border-left:1px solid var(--dim); padding-left:50px;">
-        <span class="latin">Mandata.</span>
-        <div class="info-block">
-            <h2 style="font-size:0.9em;">01. ПРИНЦИП ИЗОЛЯЦИИ</h2>
-            <p style="color:#666; font-size:0.8em; line-height:1.8;">Звук должен рождаться в вакууме. Мы отрицаем сотрудничество с внешним миром.</p>
-        </div>
-        <div class="info-block" style="margin-top:80px;">
-            <h2 style="font-size:0.9em;">02. ЭСТЕТИКА РАСПАДА</h2>
-            <p style="color:#666; font-size:0.8em; line-height:1.8;">Чистота — это ложь. Мы фиксируем момент патологии звука.</p>
-        </div>
-        <div class="info-block" style="margin-top:80px;">
-            <h2 style="font-size:0.9em;">03. КЛИНИЧЕСКИЙ НИГИЛИЗМ</h2>
-            <p style="color:#666; font-size:0.8em; line-height:1.8;">Бог умер в операционной. Мы записываем шум кардиограммы после финала.</p>
-        </div>
-    </section>
+    <section id="dogma" class="section" style="border: 1px solid var(--red); padding: 50px; background: rgba(5,0,0,0.8);">
+    <h2 class="latin" style="color: var(--red); font-size: 2.5em; text-align: center;">MANIFESTO: THE LAW OF DECAY</h2>
+    <div style="margin-top: 40px; line-height: 1.8; letter-spacing: 1px; font-size: 0.9em;">
+        <p><span style="color: var(--red);">[ I ] ОТРИЦАНИЕ ТОВАРНОСТИ.</span> Мы не производим «мерч». Мы презираем культуру потребления. Смерть нельзя надеть и пойти в бар.</p>
+        <p style="margin-top: 20px;"><span style="color: var(--red);">[ II ] КУЛЬТ НОСИТЕЛЯ.</span> Цифра — это иллюзия. Звук должен стареть, шипеть и разлагаться вместе с магнитной лентой.</p>
+        <p style="margin-top: 20px;"><span style="color: var(--red);">[ III ] КЛИНИЧЕСКАЯ ИЗОЛЯЦИЯ.</span> Лейбл — это не бизнес, это история болезни человечества. Мы фиксируем аномалии.</p>
+        <p style="margin-top: 20px;"><span style="color: var(--red);">[ IV ] АНТИ-СОЦИАЛЬНОСТЬ.</span> Никаких лайков. Никаких диалогов. Связь только через почтовый протокол для избранных.</p>
+        <p style="text-align: center; color: var(--red); font-weight: bold; margin-top: 40px; letter-spacing: 5px;">SEPTIK CHANT — ГИГИЕНА ПУСТОТЫ.</p>
+    </div>
+</section>
 
     <section id="lib" class="section">
         <h2 style="letter-spacing:15px; border-bottom:1px solid var(--bone); padding-bottom:20px;">LIBRARIVM_PROHIBI⸸VM</h2>
@@ -443,6 +664,62 @@
 </section>
 </main>
 
+
+<div id="v-spo7ify" class="full-page"style="
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                url('unnamed.jpg') no-repeat center center fixed; 
+    background-size: cover;
+">>
+    <button class="close-btn" onclick="closeVault('v-spo7ify')">[ DISCONNECT_FEED ]</button>
+    <div style="max-width:1100px; margin:0 auto;">
+        <h2 class="latin" style="font-size:3em; color:var(--red); text-align:center;">Audio_Archive</h2>
+        
+        <div style="margin: 40px 0; border: 1px solid #222; padding: 15px; display: flex; background: rgba(10, 0, 0, 0);">
+            <input type="text" id="music-search" placeholder="SEARCH_BY_ARTIST_OR_ALBUM..." 
+                   oninput="searchMusic()"
+                   style="background:transparent; border:none; color:var(--bone); width:100%; outline:none; font-family:'Courier Prime'; letter-spacing: 2px;">
+        </div>
+
+        <div style="display: flex; gap: 40px;">
+            <div style="width: 250px; border-right: 1px solid #111;">
+                <p style="font-size: 0.7em; color: var(--red);">[ FILTERS ]</p>
+                <div id="artist-list" style="margin-top:20px;"></div>
+            </div>
+            <div style="flex-grow: 1;">
+                <p style="font-size: 0.7em; color: #444;">[ RESULTS ]</p>
+                <div id="tracks-grid" style="margin-top:20px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="master-player-bar" style="position: fixed; bottom: 0; left: 0; width: 100%; background: #000; border-top: 1px solid #111; z-index: 9000; padding: 10px 30px; display: none; justify-content: space-between; align-items: center; font-family: 'Courier Prime', monospace;">
+    
+    <div style="display: flex; align-items: center; gap: 15px; width: 33%;">
+        <div id="bar-status-dot" style="width: 6px; height: 6px; background: var(--red); border-radius: 50%;"></div>
+        <div style="overflow: hidden; white-space: nowrap;">
+            <span id="bar-title" style="font-size: 0.75em; color: var(--bone);"></span>
+            <span id="bar-artist" style="font-size: 0.65em; color: #444; margin-left: 10px;"></span>
+        </div>
+    </div>
+
+    <div style="display: flex; gap: 25px; align-items: center; width: 33%; justify-content: center;">
+        <span onclick="prevTrack()" style="cursor: pointer; color: #333; font-size: 0.7em;">[ PREV ]</span>
+        <span id="bar-play-btn" onclick="toggleAudio()" style="cursor: pointer; color: var(--bone); font-size: 0.7em;">[ PAUSE ]</span>
+        <span onclick="nextTrack()" style="cursor: pointer; color: #333; font-size: 0.7em;">[ NEXT ]</span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 15px; width: 33%; justify-content: flex-end;">
+        <span style="font-size: 0.6em; color: #222;">VOL_CTRL</span>
+        <input type="range" min="0" max="1" step="0.01" value="0.05" oninput="changeVolume(this.value)" style="width: 60px;">
+    </div>
+</div>
+
+
+
+    <div style="display: flex; align-items: center; gap: 15px; width: 33%; justify-content: flex-end;">
+        <span style="font-size: 0.6em; color: #222; letter-spacing: 1px;">VOL_CTRL</span>
+
 <div id="v-archive" class="full-page">
     <button class="close-btn" onclick="closeVault('v-archive')">[ CLOSE_RECEPTACLE ]</button>
     <div style="max-width:900px; margin:0 auto;">
@@ -469,7 +746,13 @@
     <button class="close-btn" onclick="closeVault('v-grimoire')">[ CLOSE_RECEPTACLE ]</button>
     <div style="max-width:900px; margin:0 auto; text-align:center;">
         <h2 class="latin" style="font-size:4em; color:var(--red);">Maledictio</h2>
-        <div class="report-box-vault"><h3>LITANIA NIGRA</h3><p>"NIHIL SUM. NIHIL ERO. NIHIL VOLO."</p></div>
+        
+        <div class="report-box-vault">
+            <h3>LITANIA NIGRA</h3>
+            <p>"NIHIL SUM. NIHIL ERO. NIHIL VOLO."</p>
+        </div>
+
+        <div id="grim-container"></div>
     </div>
 </div>
 
@@ -499,17 +782,28 @@
 </div>
 
 <div id="v-cd-distro" class="full-page">
-    <button class="close-btn" onclick="closeVault('v-cd-distro')">[ EXIT_DISTRO ]</button>
+    <button class="close-btn" onclick="closeVault('v-cd-distro')" style="position: absolute; right: 40px; top: 40px; z-index: 100;">[ EXIT_DISTRO ]</button>
+
     <div class="content-wrap">
-        <h2 class="latin" style="text-align: center; color: #fff;">CD_&_Cassette_Stock</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px; margin-top: 60px;">
-            <div class="report-box-vault">
-                <div class="art-frame" style="height: 200px;"><img src="cd-art.jpg" alt="CD"></div>
-                <h3>SC-CD-01: INFECTED_VOICE</h3>
-                <p style="font-size: 0.7em; color: #555;">Jewel Case / 8-page Booklet</p>
-                <p style="margin-top: 15px;">PRICE: 10 EUR</p>
-                <a class="nav-link" href="mailto:order@email.com">[ ACQUIRE ]</a>
+        <h2 class="latin" style="text-align: center; color: #fff; margin-bottom: 30px;">CD_&_Cassette_Stock</h2>
+
+        <div class="vault-controls" style="margin-bottom: 40px;">
+            <div class="search-group" style="display: flex; gap: 10px; flex-grow: 1;">
+                <input type="text" id="tape-search" placeholder="SEARCH_TAPES..." oninput="filterTapes()" style="background:#000; border:1px solid #333; color:var(--bone); padding:8px;">
+                <select id="tape-genre-filter" onchange="filterTapes()" style="background:#000; border:1px solid #333; color:var(--bone); padding:8px;">
+                    <option value="all">ALL_GENRES</option>
+                    <option value="black-metal">BLACK_METAL</option>
+                    <option value="dungeon-synth">DUNGEON_SYNTH</option>
+                    <option value="ambient">AMBIENT</option>
+                </select>
             </div>
+            <div class="view-toggle">
+                <button onclick="setTapeView('grid')" id="btn-tape-grid" class="active">[ GRID ]</button>
+                <button onclick="setTapeView('list')" id="btn-tape-list">[ LIST ]</button>
+            </div>
+        </div>
+
+        <div id="tape-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px;">
         </div>
     </div>
 </div>
@@ -517,59 +811,249 @@
 
 
 <div id="v-vinyl-distro" class="full-page">
-    <button class="close-btn" onclick="closeVault('v-vinyl-distro')">[ EXIT_PLAS⸸IQVVM ]</button>
+    <button class="close-btn" onclick="closeVault('v-vinyl-distro')" style="position: absolute; right: 40px; top: 40px; z-index: 100;">[ EXIT_PLAS⸸IQVVM ]</button>
+    
     <div class="content-wrap">
-        <h2 class="latin" style="text-align: center; color: var(--red);">Plas⸸iqvvm_Archive</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; margin-top: 60px;">
-            <div class="report-box-vault" style="border-color: var(--bone);">
-                <div class="art-frame" style="height: 300px;"><img src="vinyl-art.jpg" alt="Vinyl"></div>
-                <h3 class="latin" style="font-size: 1.2em;">SC-LP-07: ANNIHILATION</h3>
-                <p style="font-size: 0.7em; color: #555;">12" Heavy Black Vinyl / Gatefold</p>
-                <p style="margin-top: 15px;">LIMITED TO 66 COPIES</p>
-                <a class="nav-link" href="mailto:order@email.com">[ ORDER_LP ]</a>
+        <h1 class="latin" style="text-align: center; color: var(--red); font-size: 3.5em; margin-bottom: 40px; text-shadow: 0 0 20px rgba(255,0,0,0.2);">Plas⸸iqvvm_Archive</h1>
+
+        <div class="vault-controls" style="margin-bottom: 50px;">
+            <div class="search-group">
+                <input type="text" id="vinyl-search" placeholder="SEARCH_DATABASE..." oninput="filterVinyl()">
+                <select id="genre-filter" onchange="filterVinyl()">
+                    <option value="all">ALL_GENRES</option>
+                    <option value="black-metal">BLACK_METAL</option>
+                    <option value="ambient">AMBIENT</option>
+                </select>
+            </div>
+
+            <div class="view-toggle">
+                <button onclick="setView('grid')" id="btn-grid" class="active">[ GRID ]</button>
+                <button onclick="setView('list')" id="btn-list">[ LIST ]</button>
             </div>
         </div>
+
+        <div id="vinyl-container"></div>
     </div>
 </div>
-
         <div id="v-library-vault" class="full-page">
-    <button class="close-btn" onclick="closeVault('v-library-vault')">[ EXIT_LIBRARIVM ]</button>
+    <button class="close-btn" onclick="closeVault('v-library-vault')" style="position: absolute; right: 40px; top: 40px; z-index: 100;">[ EXIT_LIBRARIVM ]</button>
+
     <div class="content-wrap">
-        <h2 class="latin glitch-text" style="text-align: center; font-size: 4em; color: var(--bone);">Librarivm_Prohibi⸸vm</h2>
-        <p style="text-align: center; color: #444; font-size: 0.8em; margin-bottom: 60px;">ИНДЕКС ТЕКСТОВ ДЛЯ ДЕСТАБИЛИЗАЦИИ РАЗУМА. СКАЧИВАНИЕ РАЗРЕШЕНО.</p>
+        <h2 class="latin" style="text-align: center; font-size: 3.5em; color: var(--bone); margin-bottom: 30px;">Librarivm_Prohibi⸸vm</h2>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px;">
-            
-            <div class="report-box-vault" style="border-color: #333;">
-                <h3 class="latin" style="font-size: 1.5em; color: var(--bone);">Эмиль Чоран</h3>
-                <p style="color: #666; font-size: 0.7em; margin-bottom: 10px;">[ ГОРЬКИЕ СИЛЛОГИЗМЫ ]</p>
-                <p style="font-size: 0.8em; line-height: 1.4;">"Человек — это существо, которое может привыкнуть к чему угодно, даже к собственной гибели".</p>
-                <div style="margin-top: 20px;">
-                    <a href="path/to/book.pdf" download class="nav-link" style="font-size: 0.7em; border-color: #222;">[ DOWNLOAD_PDF ]</a>
-                </div>
+        <div class="vault-controls" style="margin-bottom: 40px;">
+            <div class="search-group" style="display: flex; gap: 10px; flex-grow: 1;">
+                <input type="text" id="book-search" placeholder="SEARCH_BOOKS_OR_AUTHORS..." oninput="filterBooks()" style="background:#000; border:1px solid #333; color:var(--bone); padding:8px; flex-grow: 1;">
+                <select id="book-subject-filter" onchange="filterBooks()" style="background:#000; border:1px solid #333; color:var(--bone); padding:8px;">
+                    <option value="all">ALL_SUBJECTS</option>
+                    <option value="philosophy">PHILOSOPHY</option>
+                    <option value="occult">OCCULT</option>
+                    <option value="pathology">PATHOLOGY</option>
+                </select>
             </div>
+        </div>
 
-            <div class="report-box-vault" style="border-color: #333;">
-                <h3 class="latin" style="font-size: 1.5em; color: var(--bone);">Юлиус Эвола</h3>
-                <p style="color: #666; font-size: 0.7em; margin-bottom: 10px;">[ ОСЕДЛАТЬ ТИГРА ]</p>
-                <p style="font-size: 0.8em; line-height: 1.4;">Инструкция по выживанию в мире, где боги давно мертвы, а смыслы стерты.</p>
-                <div style="margin-top: 20px;">
-                    <a href="#" class="nav-link" style="font-size: 0.7em; border-color: #222;">[ DOWNLOAD_EPUB ]</a>
-                </div>
-            </div>
-
-            <div class="report-box-vault" style="border-color: #333;">
-                <h3 class="latin" style="font-size: 1.5em; color: var(--bone);">Ф. Мейнлендер</h3>
-                <p style="color: #666; font-size: 0.7em; margin-bottom: 10px;">[ ФИЛОСОФИЯ ОСВОБОЖДЕНИЯ ]</p>
-                <p style="font-size: 0.8em; line-height: 1.4;">Мир как результат самоубийства Бога. Чистый нигилизм в его абсолюте.</p>
-                <div style="margin-top: 20px;">
-                    <a href="#" class="nav-link" style="font-size: 0.7em; border-color: #222;">[ DOWNLOAD_PDF ]</a>
-                </div>
-            </div>
-
+        <div id="book-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px;">
         </div>
     </div>
 </div>
+
+<div id="v-trumpets" class="full-page">
+    <button class="close-btn" onclick="closeVault('v-trumpets')">[ EXIT_STATION ]</button>
+    
+    <div class="content-wrap" style="text-align: center;">
+        <h2 class="latin" style="color: var(--red); font-size: 3em; margin-bottom: 50px;">SEVEN_TRUMPETS_PROGRESSION</h2>
+        
+        <div class="trumpets-grid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto;">
+            <div class="trumpet-cell active">
+                <div class="trumpet-icon">I</div>
+                <div class="trumpet-text">RUST</div>
+            </div>
+            <div class="trumpet-cell active">
+                <div class="trumpet-icon">II</div>
+                <div class="trumpet-text">PUS</div>
+            </div>
+            <div class="trumpet-cell">
+                <div class="trumpet-icon">III</div>
+                <div class="trumpet-text">WAITING...</div>
+            </div>
+            <div class="trumpet-cell"><div class="trumpet-icon">IV</div><div class="trumpet-text">WAITING...</div></div>
+            <div class="trumpet-cell"><div class="trumpet-icon">V</div><div class="trumpet-text">WAITING...</div></div>
+            <div class="trumpet-cell"><div class="trumpet-icon">VI</div><div class="trumpet-text">WAITING...</div></div>
+            <div class="trumpet-cell"><div class="trumpet-icon">VII</div><div class="trumpet-text">WAITING...</div></div>
+        </div>
+    </div>
+</div>
+
+<div id="v-terminal" class="full-page">
+    <button class="close-btn" onclick="closeVault('v-terminal')">[ DISCONNECT ]</button>
+    <div class="content-wrap terminal-text" id="terminal-log">
+        </div>
+</div>
+
+<div id="v-clinical-vault" class="full-page">
+    <button class="close-btn" onclick="closeVault('v-clinical-vault')">[ EXIT_RECORDS ]</button>
+    
+    <div class="content-wrap">
+        <h2 class="latin" style="text-align: center; font-size: 3em; color: var(--red); margin-bottom: 20px;">CLINICAL_DISSECTION_RECORDS</h2>
+        
+        <div class="vault-controls" style="margin-bottom: 40px;">
+            <div class="search-group" style="display: flex; gap: 10px; flex-grow: 1;">
+                <input type="text" id="clinical-search" placeholder="SCAN_BY_CASE_OR_METHOD..." oninput="filterClinical()" style="background:#000; border:1px solid #222; color:var(--red); padding:8px; flex-grow: 1;">
+            </div>
+            <div class="view-toggle">
+                <button onclick="setClinicalView('grid')" id="btn-clin-grid" class="active">[ GRID ]</button>
+                <button onclick="setClinicalView('list')" id="btn-clin-list">[ LIST ]</button>
+            </div>
+        </div>
+
+        <div id="clinical-container"></div>
+    </div>
+</div>
+
+<div id="v-black-market" class="full-page">
+    <button class="close-btn" onclick="closeVault('v-black-market')">[ DISCONNECT ]</button>
+    <div class="content-wrap">
+        <h2 class="latin" style="color: var(--red);">FULL_DISTRO_INVENTORY_REPORT</h2>
+        <div id="market-list" class="dos-list">
+            </div>
+    </div>
+</div>
+
+<div id="v-infected-map" class="full-page">
+    <button class="close-btn" onclick="closeVault('v-infected-map')">[ EXIT_OBSERVATION ]</button>
+    <div class="content-wrap" style="text-align: center;">
+        <h2 class="latin" style="color: var(--red);">THE_INFECTED_MAP</h2>
+        <div class="infection-log" style="font-family: monospace; color: #444; margin-top: 50px; line-height: 2;">
+            <p>> DETECTED_OUTBREAKS:</p>
+            <p style="color: var(--bone);">OSLO // TOKYO // ZHYTOMYR // BERLIN // KYIV // LONDON</p>
+            <p style="margin-top: 30px; font-size: 0.6em;">CURRENT_STATUS: <span style="color: var(--red);">PANDEMIC_STABLE</span></p>
+        </div>
+    </div>
+</div>
+
+<div id="v-propaganda" class="full-page">
+    <button class="close-btn" onclick="closeVault('v-propaganda')">[ DISCONNECT ]</button>
+    
+    <div class="content-wrap">
+        <h2 class="latin" style="color: var(--red); text-align: center;">PROPAGANDA_RESOURCES</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px;">
+            <div class="prop-block">
+                <h3 class="latin" style="font-size: 0.8em; border-bottom: 1px solid #222; padding-bottom: 10px;">VISUAL_IDENTIFICATION</h3>
+                <div class="download-item">
+                    <span>SEPTIC_CHANT_LOGO (GLITCH)</span>
+                    <a href="SC_Logo_Glitch.png" download class="nav-link">[ DOWNLOAD_PNG ]</a>
+                </div>
+                <div class="download-item">
+                    <span>HELVETE_VEKTOR_SIGIL</span>
+                    <a href="HV_Sigil.png" download class="nav-link">[ DOWNLOAD_PNG ]</a>
+                </div>
+            </div>
+
+            <div class="prop-block">
+                <h3 class="latin" style="font-size: 0.8em; border-bottom: 1px solid #222; padding-bottom: 10px;">PROJECT_DOSSIERS</h3>
+                <div class="download-item">
+                    <span>SEPTIC_CHANT_BIO (EN/UA)</span>
+                    <a href="SC_Bio.pdf" download class="nav-link">[ DOWNLOAD_PDF ]</a>
+                </div>
+                <div class="download-item">
+                    <span>HELVETE_VEKTOR_MANIFESTO</span>
+                    <a href="HV_Manifest.pdf" download class="nav-link">[ DOWNLOAD_PDF ]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div id="v-submission" class="full-page">
+    <button class="close-btn" onclick="closeVault('v-submission')">[ DISCONNECT ]</button>
+    
+    <div class="content-wrap" style="max-width: 800px;">
+        <h2 class="latin" style="color: var(--red); text-align: center; font-size: 2.5em;">SUBMISSION_RITUAL</h2>
+        
+        <div class="ritual-container" style="background: rgba(10,10,10,0.8); border: 1px solid #222; padding: 40px; margin-top: 30px; line-height: 1.8;">
+            <p style="color: var(--red); font-weight: bold; margin-bottom: 20px;">[ WARNING: DO NOT WASTE OUR TIME ]</p>
+            
+            <p style="color: #888; font-size: 0.9em; text-transform: uppercase;">
+                Якщо ваш звук недостатньо гнилий, не витрачайте наш час. Присилайте посилання на стрімінг тільки для ознайомлення, але ми віддамо перевагу поштовому пакету з касетою. Ми шукаємо одержимість, а не техніку гри.
+            </p>
+
+            <div style="margin-top: 40px; border-top: 1px solid #222; padding-top: 20px;">
+                <h3 class="latin" style="font-size: 1em; color: var(--bone);">ACCEPTED_FORMATS:</h3>
+                <ul style="list-style: square; color: #555; font-size: 0.8em; margin-top: 10px;">
+                    <li>PHYSICAL_TAPES (Preferred)</li>
+                    <li>REHEARSAL_RECORDINGS (Raw Only)</li>
+                    <li>ENCRYPTED_DIGITAL_STREAMS</li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <a href="mailto:submissions@septikchant.com" class="nav-link" style="display: inline-block; padding: 10px 20px; border: 1px solid var(--red); color: var(--red);">
+                    [ INITIATE_CONTACT ]
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="v-transmission" class="full-page">
+    <button class="close-btn" onclick="closeVault('v-transmission')">[ DISCONNECT ]</button>
+    
+    <div class="content-wrap" style="max-width: 900px;">
+        <h2 class="latin" style="color: var(--red); text-align: center;">[ TRANSMISSION_NODES ] // СВЯЗИ_И_ОБМЕН</h2>
+        
+        <div class="nodes-container" style="background: rgba(5,5,5,0.9); border: 1px solid #111; padding: 30px; margin-top: 20px;">
+            
+            <p style="font-size: 0.8em; color: #666; margin-bottom: 30px; line-height: 1.6;">
+                Сеть SEPTIK CHANT разрастается через прямой контакт. Мы презираем рыночные отношения. Если у вас есть лейбл или дистро, и вы дышите тем же гноем, что и мы — наши архиви открыты для обмена.
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                <div class="trade-rules">
+                    <h3 class="latin" style="font-size: 0.9em; color: var(--red);">TRADE_TERMS:</h3>
+                    <ul style="list-style: none; padding: 0; font-size: 0.7em; color: #888; line-height: 1.8;">
+                        <li><span style="color: var(--bone);">[ 1:1 ]</span> Кассета за кассету, винил за винил.</li>
+                        <li><span style="color: var(--bone);">[ FILTER ]</span> Никакого Heavy/Power или "чистого" звука.</li>
+                        <li><span style="color: var(--bone);">[ VOLUME ]</span> Мин. 3 единицы, макс. 10.</li>
+                        <li><span style="color: var(--bone);">[ PHYSICAL ]</span> Только копии с полиграфией.</li>
+                        <li><span style="color: var(--bone);">[ TRACKING ]</span> Трек-номер обязателен.</li>
+                    </ul>
+                </div>
+
+                <div class="trade-template">
+                    <h3 class="latin" style="font-size: 0.9em; color: var(--red);">INQUIRY_TEMPLATE:</h3>
+                    <pre style="font-size: 0.6em; color: #444; background: #000; padding: 10px; border: 1px solid #111;">
+SUBJECT: TRADE_INQUIRY // [LABEL_NAME]
+- Ссылка на ваш ростер:
+- Список позиций на обмен:
+- Что нужно от Septik Chant:
+- Локация:
+                    </pre>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; border-top: 1px solid #111; padding-top: 20px;">
+                <h3 class="latin" style="font-size: 0.8em; color: var(--bone);">AFFILIATED_NODES:</h3>
+                <div style="font-size: 0.7em; color: #333; display: flex; gap: 20px;">
+                    <span>[PENDING] NODE_SCANDINAVIA</span>
+                    <span>[PENDING] NODE_AMERICAS</span>
+                    <span>[PENDING] NODE_EASTERN_FRONT</span>
+                </div>
+            </div>
+
+            <p style="margin-top: 30px; font-size: 0.65em; color: #444; border-top: 1px solid #222; padding-top: 15px;">
+                <span style="color: var(--red);">ВНИМАНИЮ ТУРИСТОВ:</span> Если вы «просто слушатель» — перейдите в раздел <span onclick="openVault('v-black-market')" style="text-decoration: underline; cursor: pointer; color: var(--bone);">[ BLACK_MARKET ]</span>.
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+
+   
 
 <script>
     const hum = document.getElementById('terminal-hum');
@@ -693,78 +1177,100 @@ function checkChatPass() {
 
 // --- БАЗА ДАНИХ (РЕДАГУЙ ТУТ) ---
 
-const tapesData = [
-    { title: "SC-T-01: FOREST_VOID", desc: "PRO-DONE TAPE / WHITE SHELL", price: "7 EUR", link: "mailto:order@email.com", img: "https://via.placeholder.com/300x400/000/fff?text=TAPE_01" },
-    { title: "SC-T-02: INFECTED_BLOOD", desc: "BLACK TAPE / LIMITED 15", price: "8 EUR", link: "mailto:order@email.com", img: "https://via.placeholder.com/300x400/000/fff?text=TAPE_02" },
-    { title: "SC-T-01: FOREST_VOID", desc: "PRO-DONE TAPE / WHITE SHELL", price: "7 EUR", link: "mailto:order@email.com", img: "https://via.placeholder.com/300x400/000/fff?text=TAPE_01" },
-];
+const grimoireData = [
+    {
+        title: "Септический Псалом",
+        content:
+"В начале была Гниль. И Гниль была у Бога, и Гниль была Бог. Мы возносим хвалу не солнцу, но плесени на стенах палаты. Святая Энтропия, приди. Пусть наши вены станут ржавыми трубами, Пусть наш голос станет белым шумом мертвых планет. Septik Chant. Изрыгаем мир по частям. Никакого покаяния. Только некроз.»"
+    },
+     { 
+        title: "Уравнение Вектора", 
+        content: "«Точка А: Рождение (Ошибка). Точка Б: Аннигиляция (Истина). Линия между ними — лезвие бритвы. Мы ускоряем падение. Вектор направлен внутрь черепной коробки. Там, где затихает пульс, начинается истинный Блэк Метал. 07 — номер твоего последнего приюта. Слушай скрежет труб — это снимают твою кожу.»" 
+    },
+     { 
+        title: "Оккультный блок:", 
+        content: "" 
+    },
+    {
+        title:"Ритуал Магнитной Ленты",
+        content:" Закопай чистую кассету в землю на территории кладбища или заброшенной больницы на 7 дней. Запиши на неё шум пустой комнаты. Это и есть голос Septik Chant."
+    },
+    {
+        title:"Практика Изоляции (Палата 07)",
+        content:" Лишение света и звука на 24 часа. Единственный разрешенный стимул — низкочастотный гул (drone) Helvete Vektor через наушники. Цель — стереть личность и подготовить сосуд для Трансляции."
+    }
 
-const vinylData = [
-    { title: "SC-LP-07: ETERNAL_NULL", desc: "12' BLACK WAX / GATEFOLD", price: "25 EUR", link: "mailto:order@email.com", img: "https://via.placeholder.com/400x400/000/fff?text=LP_01" },
-    { title: "SC-LP-07: ANNIHILATION", desc: "12' Heavy Black Vinyl / Gatefold", price: "25 EUR", link: "mailto:x@x.com", img: "unnamed.jpg" }
-];
 
-const booksData = [
-    { author: "EMIL_CIORAN", title: "ГОРЬКИЕ СИЛЛОГИЗМЫ", link: "#", type: "PDF" },
-    { author: "PHILIPP_MAINLANDER", title: "ФИЛОСОФИЯ ОСВОБОЖДЕНИЯ", link: "#", type: "PDF" },
-    { author: "JULIUS_EVOLA", title: "ОСЕДЛАТЬ ТИГРА", link: "#", type: "EPUB" },
-    { author: "GUSTAV_MEYRINK", title: "ГОЛЕМ", link: "golem.pdf", type: "PDF" }
 ];
+;
 
 // --- ЛОГІКА СИСТЕМИ (НЕ ЧІПАЙ) ---
 
 function renderContent() {
     console.log("Initiating universal render...");
 
-    // 1. БОКС ДЛЯ КАСЕТ (DISTRO)
-    const tapeContainer = document.getElementById('tape-container') || document.querySelector('#v-cd-distro .content-wrap div[style*="grid"]');
-    if (tapeContainer) {
-        tapeContainer.innerHTML = ''; 
-        tapesData.forEach(item => {
-            tapeContainer.innerHTML += `
-                <div class="report-box-vault">
-                    <div class="art-frame" style="height:200px;"><img src="${item.img}" style="width:100%; filter:grayscale(1);"></div>
-                    <h3 style="font-size:0.9em; margin-top:15px;">${item.title}</h3>
-                    <p style="font-size:0.7em; color:#555;">${item.desc}</p>
-                    <p style="color:var(--red); margin:10px 0;">${item.price}</p>
-                    <a href="${item.link}" class="nav-link" style="border:1px solid #333; padding:5px 10px; display:inline-block;">[ ORDER ]</a>
-                </div>`;
-        });
-    }
+    
+    function renderContent() {
+    // Шукаємо контейнери
+    const vinylContainer = document.getElementById('vinyl-container');
+    const bookContainer = document.getElementById('book-container');
+    const psyBox = document.getElementById('psy-ward-container');
 
-    // 2. БОКС ДЛЯ ВІНІЛУ (PLASTIQVVM)
-    const vinylContainer = document.getElementById('vinyl-container') || document.querySelector('#v-vinyl-distro .content-wrap div[style*="grid"]');
-    if (vinylContainer) {
-        vinylContainer.innerHTML = '';
-        vinylData.forEach(item => {
-            vinylContainer.innerHTML += `
-                <div class="report-box-vault" style="border-color: var(--bone);">
-                    <div class="art-frame" style="height:300px;"><img src="${item.img}" style="width:100%; filter:grayscale(1);"></div>
-                    <h3 class="latin" style="font-size:1.2em;">${item.title}</h3>
-                    <p style="font-size:0.7em; color:#555;">${item.desc}</p>
-                    <p style="margin-top:15px; color:var(--red);">${item.price}</p>
-                    <a href="${item.link}" class="nav-link" style="border:1px solid var(--red);">[ ORDER_LP ]</a>
-                </div>`;
-        });
-    }
 
-    // 3. БОКС ДЛЯ БІБЛІОТЕКИ (LIBRARIVM)
-    const bookContainer = document.getElementById('book-container') || document.querySelector('#v-library-vault .content-wrap div[style*="grid"]');
-    if (bookContainer) {
-        bookContainer.innerHTML = '';
-        booksData.forEach(item => {
-            bookContainer.innerHTML += `
-                <div class="report-box-vault" style="border-color: #333;">
-                    <h3 class="latin" style="font-size: 1.5em; color: var(--bone);">${item.author}</h3>
-                    <p style="color: #666; font-size: 0.7em; margin-bottom: 10px;">[ ${item.title} ]</p>
-                    <p style="font-size: 0.8em; line-height: 1.4;">${getQuote(item.author)}</p>
-                    <div style="margin-top: 20px;">
-                        <a href="${item.link}" class="nav-link" style="font-size: 0.7em; border-color: #222;">[ DOWNLOAD_${item.type} ]</a>
-                    </div>
+    // Рендер логів пацієнтів (як на вашому скрині)
+    if (psyBox && typeof psywardLogs !== 'undefined') {
+        psyBox.innerHTML = '';
+        psywardLogs.forEach(log => {
+            psyBox.innerHTML += `
+                <div style="margin-bottom:20px; border-bottom:1px solid #111; padding-bottom:10px;">
+                    <span style="color:var(--red); font-size:0.7em;">[ ${log.date} ]</span>
+                    <p style="font-size:0.8em; color:#666; margin-top:5px; text-transform:none;">${log.note}</p>
                 </div>`;
         });
     }
 }
+        // Усередині функції renderContent, де йде цикл по vinylData:
+vinylData.forEach(item => {
+    // Перевіряємо статус
+    const isSold = item.status === "SOLD_OUT";
+
+    vinylContainer.innerHTML += `
+        <div class="report-box-vault" style="opacity: ${isSold ? '0.4' : '1'}; border-color: ${isSold ? '#222' : 'var(--bone)'};">
+            <div class="art-frame" style="height:300px;">
+                <img src="${item.img}" style="width:100%; filter: ${isSold ? 'grayscale(1)' : 'none'};">
+            </div>
+            <h3 class="latin" style="font-size:1.2em;">${item.title}</h3>
+            <p style="font-size:0.7em; color:#555;">${item.desc}</p>
+            <p style="margin-top:15px; color:${isSold ? '#444' : 'var(--red)'};">${item.price}</p>
+            
+            ${isSold 
+                ? `<span style="color:#333; font-size:0.8em;">[ ARCHIVED ]</span>` 
+                : `<a href="${item.link}" class="nav-link" style="border:1px solid var(--red);">[ ORDER_LP ]</a>`
+            }
+        </div>`;
+});
+    }
+
+    
+    
+
+        // Рендеринг нових матеріалів у Гримуар
+    const grimContainer = document.getElementById('grim-container');
+    if (grimContainer) {
+        grimContainer.innerHTML = ''; // Очищаємо тільки контейнер для НОВИХ статей
+        grimoireData.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'report-box-vault';
+            div.innerHTML = `
+                <h3>${item.title}</h3>
+                <p>"${item.content}"</p>
+            `;
+            grimContainer.appendChild(div);
+        });
+    }
+
+    
+
 
 // Допоміжна функція для цитат
 function getQuote(author) {
@@ -780,8 +1286,639 @@ function getQuote(author) {
 // ЗАПУСК СИСТЕМИ
 document.addEventListener('DOMContentLoaded', renderContent);
 
+// 1. Твоя библиотека треков
+const musicLibrary = [
+    { id: 0, title: "FREEZING MOON", artist: "MAYHEM", album: "DE MYSTERIIS", file: "01. Freezing Moon.mp3", cover: "https://via.placeholder.com/100/000/fff?text=MAYHEM" },
+    { id: 1, title: "TRANSILVANIAN HUNGER", artist: "DARKTHRONE", album: "TRANSILVANIAN HUNGER", file: "", cover: "https://via.placeholder.com/100/000/fff?text=DARKTHRONE" },
+    { id: 2, title: "Death-Pierce-me", artist: "Silencer", album: "Death-Pierce-me", file: "", cover: "https://via.placeholder.com/100/000/fff?text=DARKTHRONE" }
+    
+    // Сюда просто добавляешь новые объекты по шаблону выше
+];
 
+// 2. Функция отрисовки списка
+function renderMusicLibrary(data = musicLibrary) {
+    const grid = document.getElementById('tracks-grid');
+    const artistBox = document.getElementById('artist-list');
+    if (!grid || !artistBox) return;
+
+    // Отрисовка треков
+    grid.innerHTML = '';
+    data.forEach(item => {
+        grid.innerHTML += `
+            <div class="report-box-vault" onclick="loadTrackById(${item.id})" 
+                 style="cursor:pointer; display:flex; gap:20px; align-items:center; margin-bottom:10px; border-color:#222; background:rgba(10,0,0,0.2);">
+                <img src="${item.cover}" style="width:50px; height:50px; border:1px solid #333; opacity:0.6;">
+                <div style="flex-grow:1;">
+                    <h4 style="font-size:0.9em; margin:0;">${item.title}</h4>
+                    <p style="font-size:0.6em; color:#555; margin:5px 0 0 0;">${item.artist} — ${item.album}</p>
+                </div>
+                <span style="color:var(--red); font-size:0.7em;">[ PLAY ]</span>
+            </div>`;
+    });
+
+    // Отрисовка списка уникальных артистов слева
+    const artists = [...new Set(musicLibrary.map(item => item.artist))];
+    artistBox.innerHTML = `<div onclick="renderMusicLibrary()" class="nav-link" style="border:none; cursor:pointer; font-size:0.8em; margin-bottom:10px;">[ ALL_ARTISTS ]</div>`;
+    artists.forEach(a => {
+        artistBox.innerHTML += `<div onclick="filterByArtist('${a}')" class="nav-link" style="border:none; cursor:pointer; color:#666; font-size:0.8em; margin-bottom:5px;">> ${a}</div>`;
+    });
+}
+
+// 3. Логика поиска
+function searchMusic() {
+    const query = document.getElementById('music-search').value.toLowerCase();
+    const filtered = musicLibrary.filter(item => 
+        item.title.toLowerCase().includes(query) || 
+        item.artist.toLowerCase().includes(query) || 
+        item.album.toLowerCase().includes(query)
+    );
+    renderMusicLibrary(filtered);
+}
+
+// 4. Фильтр по артисту
+function filterByArtist(artist) {
+    const filtered = musicLibrary.filter(item => item.artist === artist);
+    renderMusicLibrary(filtered);
+}
+
+
+
+
+// 6. Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+    renderMusicLibrary();
+});
+
+// Змінна для відстеження поточного треку
+
+
+// Функція СТОП / ПЛЕЙ (модернізована)
+function toggleAudio() {
+    const hum = document.getElementById('terminal-hum');
+    const barBtn = document.getElementById('bar-play-btn');
+    
+    if (hum.paused) {
+        hum.play();
+        barBtn.innerText = '[ PAUSE ]';
+        document.getElementById('stream-status').innerText = 'STREAMING_LIVE';
+    } else {
+        hum.pause();
+        barBtn.innerText = '[ PLAY ]';
+        document.getElementById('stream-status').innerText = 'SIGNAL_PAUSED';
+    }
+}
+
+// Наступний трек
+function nextTrack() {
+    currentMusicIndex = (currentMusicIndex + 1) % musicLibrary.length;
+    loadTrackById(musicLibrary[currentMusicIndex].id);
+}
+
+// Попередній трек
+function prevTrack() {
+    currentMusicIndex = (currentMusicIndex - 1 + musicLibrary.length) % musicLibrary.length;
+    loadTrackById(musicLibrary[currentMusicIndex].id);
+}
+
+// Регулювання гучності
+function changeVolume(val) {
+    const hum = document.getElementById('terminal-hum');
+    hum.volume = val;
+}
+
+let currentMusicIndex = 0;
+
+function loadTrackById(id) {
+    const track = musicLibrary.find(t => t.id === id);
+    if (!track) return;
+
+    const hum = document.getElementById('terminal-hum');
+    const bar = document.getElementById('master-player-bar');
+    
+    // Показуємо панель
+    if (bar) bar.style.display = 'flex';
+    
+    // Завантажуємо файл
+    hum.src = track.file;
+    hum.play().catch(e => console.log("Помилка відтворення: перевір шлях до файлу"));
+    
+    // Оновлюємо текст на панелі
+    document.getElementById('bar-title').innerText = track.title;
+    document.getElementById('bar-artist').innerText = track.artist;
+    
+    // Оновлюємо кнопку
+    document.getElementById('bar-play-btn').innerText = '[ PAUSE ]';
+}
+
+function toggleAudio() {
+    const hum = document.getElementById('terminal-hum');
+    const barBtn = document.getElementById('bar-play-btn');
+    const dot = document.getElementById('bar-status-dot');
+    
+    if (hum.paused) {
+        hum.play();
+        barBtn.innerText = '[ PAUSE ]';
+        dot.style.background = 'var(--red)';
+    } else {
+        hum.pause();
+        barBtn.innerText = '[ PLAY ]';
+        dot.style.background = '#222'; // Точка гасне, коли пауза
+    }
+}
+
+function nextTrack() {
+    currentMusicIndex = (currentMusicIndex + 1) % musicLibrary.length;
+    loadTrackById(musicLibrary[currentMusicIndex].id);
+}
+
+function prevTrack() {
+    currentMusicIndex = (currentMusicIndex - 1 + musicLibrary.length) % musicLibrary.length;
+    loadTrackById(musicLibrary[currentMusicIndex].id);
+}
+
+function changeVolume(val) {
+    document.getElementById('terminal-hum').volume = val;
+}
+
+const psyWardLogs = [
+    { date: "DAY_44", note: "Лента зажевала голос. Оставил так. Звучит как агония. SC-002 обретает форму гноя." },
+    { date: "DAY_51", note: "Тишина в коридорах стала слишком громкой. Записал резонанс пустой палаты №07. Это будет интро." }
+];
+
+// Додай функцію рендерингу в renderContent():
+const psyBox = document.getElementById('psy-ward-container');
+if (psyBox) {
+    psyBox.innerHTML = '';
+    psyWardLogs.forEach(log => {
+        psyBox.innerHTML += `<div style="margin-bottom:20px; border-bottom:1px solid #111; padding-bottom:10px;">
+            <span style="color:var(--red); font-size:0.7em;">[ ${log.date} ]</span>
+            <p style="font-size:0.8em; color:#666; margin-top:5px; text-transform:none;">${log.note}</p>
+        </div>`;
+    });
+}
+window.onload = () => {
+    if (typeof renderContent === 'function') {
+        renderContent();
+    }
+    console.log("Контент завантажено.");
+};
+
+// 1. Оновлені дані з метатегами
+const vinylData = [
+    { 
+        id: "LP_01", 
+        title: "SC-LP-01: ANNIHILATION", 
+        artist: "SEPTIC CHANT",
+        year: "2024",
+        genre: "black-metal",
+        status: "AVAILABLE",
+        img: "unnamed.jpg" 
+    },
+    { 
+        id: "LP_02", 
+        title: "SC-LP-02: VOID_SIGNAL", 
+        artist: "UNKNOWN ENTITY",
+        year: "2023",
+        genre: "ambient",
+        status: "SOLD_OUT",
+        img: "bg.jpg" 
+    }
+];
+
+let currentView = 'grid';
+
+// 2. Функція зміни вигляду
+function setView(view) {
+    currentView = view;
+    const container = document.getElementById('vinyl-container');
+    
+    document.getElementById('btn-grid').classList.toggle('active', view === 'grid');
+    document.getElementById('btn-list').classList.toggle('active', view === 'list');
+    
+    if (view === 'list') {
+        container.classList.add('list-view');
+    } else {
+        container.classList.remove('list-view');
+    }
+    renderVinyl(getFilteredData()); // Перемальовуємо з поточними фільтрами
+}
+
+// 3. Функція фільтрації
+function getFilteredData() {
+    const searchTerm = document.getElementById('vinyl-search').value.toLowerCase();
+    const genreTerm = document.getElementById('genre-filter').value;
+
+    return vinylData.filter(item => {
+        const matchesSearch = item.title.toLowerCase().includes(searchTerm) || 
+                              item.artist.toLowerCase().includes(searchTerm) ||
+                              item.year.includes(searchTerm);
+        const matchesGenre = genreTerm === 'all' || item.genre === genreTerm;
+        return matchesSearch && matchesGenre;
+    });
+}
+
+// 4. Оновлений рендер
+function renderVinyl(dataToRender = vinylData) {
+    const container = document.getElementById('vinyl-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    dataToRender.forEach(item => {
+        const isSold = item.status === "SOLD_OUT";
+        // Додаємо класи залежно від вигляду
+        const viewClass = currentView === 'list' ? 'item-list-mode' : 'item-grid-mode';
+        
+        container.innerHTML += `
+            <div class="report-box-vault ${viewClass}" style="opacity: ${isSold ? '0.4' : '1'};">
+                <div class="art-frame">
+                    <img src="${item.img}" alt="cover">
+                </div>
+                <div class="info-content">
+                    <h3 class="latin" style="color:var(--bone);">${item.title}</h3>
+                    <div class="meta-data" style="font-size:0.7em; color:#666;">
+                        ${item.artist} <span style="color:var(--red);">//</span> ${item.year} <span style="color:var(--red);">//</span> ${item.genre}
+                    </div>
+                </div>
+                <div class="action-zone">
+                    ${isSold ? 
+                        '<span class="status-tag">[ SOLD ]</span>' : 
+                        `<a href="mailto:order@septikchant.com" class="order-btn">[ ORDER ]</a>`
+                    }
+                </div>
+            </div>`;
+    });
+}
+
+function filterVinyl() {
+    renderVinyl(getFilteredData());
+}
+
+
+// --- УПРАВЛІННЯ ВІКНАМИ (ВАЛТАМИ) ---
+function openVault(id) {
+    const v = document.getElementById(id);
+    if (v) {
+        v.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeVault(id) {
+    const v = document.getElementById(id);
+    if (v) {
+        v.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// --- ЗАПУСК ПРИ ЗАВАНТАЖЕННІ СТОРІНКИ ---
+window.onload = () => {
+    renderVinyl();
+    console.log("System Initialized. Vinyl Rendered.");
+};
+
+// Данные кассет
+const tapesData = [
+    { 
+        id: "TAPE_01", 
+        title: "SC-T-01: FOREST_VOID", 
+        artist: "FOREST", 
+        year: "2023", 
+        genre: "black-metal", 
+        status: "AVAILABLE", 
+        img: "unnamed.jpg" 
+    },
+    { 
+        id: "TAPE_02", 
+        title: "SC-T-02: INFECTED", 
+        artist: "PLAGUE", 
+        year: "2024", 
+        genre: "ambient", 
+        status: "SOLD_OUT", 
+        img: "bg.jpg" 
+    }
+];
+
+let currentTapeView = 'grid'; // По умолчанию сетка
+
+// Функция смены вида
+function setTapeView(mode) {
+    currentTapeView = mode;
+    const container = document.getElementById('tape-container');
+    if (!container) return;
+
+    // Меняем класс контейнера для CSS
+    if (mode === 'list') {
+        container.classList.add('list-mode');
+    } else {
+        container.classList.remove('list-mode');
+    }
+
+    // Подсветка активной кнопки
+    document.getElementById('btn-tape-grid').classList.toggle('active', mode === 'grid');
+    document.getElementById('btn-tape-list').classList.toggle('active', mode === 'list');
+
+    filterTapes(); // Перерисовываем с учетом фильтра
+}
+
+// Функция фильтрации
+function filterTapes() {
+    const searchVal = document.getElementById('tape-search').value.toLowerCase();
+    const genreVal = document.getElementById('tape-genre-filter').value;
+
+    const filtered = tapesData.filter(item => {
+        const matchesSearch = item.title.toLowerCase().includes(searchVal) || 
+                              item.artist.toLowerCase().includes(searchVal);
+        const matchesGenre = (genreVal === 'all' || item.genre === genreVal);
+        return matchesSearch && matchesGenre;
+    });
+
+    renderTapes(filtered);
+}
+
+// Функция отрисовки
+function renderTapes(data = tapesData) {
+    const container = document.getElementById('tape-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    data.forEach(item => {
+        const isSold = item.status === "SOLD_OUT";
+        const modeClass = (currentTapeView === 'list' ? 'item-list-mode' : 'item-grid-mode');
+
+        container.innerHTML += `
+            <div class="report-box-vault ${modeClass}" style="opacity: ${isSold ? '0.3' : '1'};">
+                <div class="art-frame">
+                    <img src="${item.img}" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div class="info-content" style="flex-grow:1;">
+                    <h3 class="latin" style="font-size:1.1em !important;">${item.title}</h3>
+                    <div style="font-size:0.7em; color:#555;">${item.artist} // ${item.year} // ${item.genre}</div>
+                </div>
+                <div class="action-zone">
+                    ${isSold ? '[ SOLD ]' : `<a href="mailto:order@septikchant.com?subject=ORDER_${item.id}" class="nav-link">[ ORDER ]</a>`}
+                </div>
+            </div>`;
+    });
+}
+
+// --- ДАНІ БІБЛІОТЕКИ ---
+const booksData = [
+    { 
+        author: "ЭМИЛЬ ЧОРАН", 
+        title: "ГОРЬКИЕ СИЛЛОГИЗМЫ", 
+        subject: "philosophy", 
+        desc: "Анатомия отчаяния и гигиена пустоты.",
+        file: "books/cioran.pdf" 
+    },
+    { 
+        author: "Ф. МЕЙНЛЕНДЕР", 
+        title: "ФИЛОСОФИЯ ОСВОБОЖДЕНИЯ", 
+        subject: "philosophy", 
+        desc: "Мир как результат самоубийства Бога.",
+        file: "books/mainlander.pdf" 
+    },
+    { 
+        author: "Ф. МЕЙНЛЕНДЕР", 
+        title: "ФИЛОСОФИЯ ОСВОБОЖДЕНИЯ", 
+        subject: "philosophy", 
+        desc: "Мир как результат самоубийства Бога.",
+        file: "books/mainlander.pdf" 
+    }
+];
+
+// --- ЛОГІКА ФІЛЬТРАЦІЇ ---
+function filterBooks() {
+    const searchTerm = document.getElementById('book-search').value.toLowerCase();
+    const subjectTerm = document.getElementById('book-subject-filter').value;
+
+    const filtered = booksData.filter(item => {
+        const matchesSearch = item.title.toLowerCase().includes(searchTerm) || 
+                              item.author.toLowerCase().includes(searchTerm);
+        const matchesSubject = (subjectTerm === 'all' || item.subject === subjectTerm);
+        return matchesSearch && matchesSubject;
+    });
+
+    renderBooks(filtered);
+}
+
+// --- РЕНДЕР КНИГ ---
+function renderBooks(data = booksData) {
+    const container = document.getElementById('book-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    data.forEach(item => {
+        container.innerHTML += `
+            <div class="report-box-vault" style="border-left: 3px solid #222; padding: 25px; background: rgba(10,10,10,0.5); transition: 0.3s;">
+                <h3 class="latin" style="font-size: 1.3em; color: var(--bone); margin-bottom: 5px;">${item.author}</h3>
+                <p style="color: var(--red); font-size: 0.7em; margin-bottom: 15px;">[ ${item.title} ]</p>
+                <p style="font-size: 0.8em; color: #666; line-height: 1.5; margin-bottom: 20px; text-transform: none;">${item.desc}</p>
+                <div style="border-top: 1px solid #111; padding-top: 15px;">
+                    <a href="${item.file}" download class="nav-link" style="font-size: 0.7em; border: 1px solid #333; padding: 5px 10px;">[ DOWNLOAD_PDF ]</a>
+                </div>
+            </div>`;
+    });
+}
+
+        window.onload = () => {
+    renderVinyl(); // Рисуем винил
+    renderTapes(); // Рисуем кассеты
+    renderBooks(); // Рисуем книги
+    console.log("System initialized. All archives loaded.");
+};
+
+// Твої релізи (Лейбл)
+const clinicalData = [
+    { 
+        id: "SC-001", 
+        title: "CASE_STUDY: ANNIHILATION", 
+        artist: "SEPTIC CHANT",
+        method: "Distorted frequencies, vomit-vocals",
+        img: "unnamed.jpg" 
+    },
+    { 
+        id: "HV-001", 
+        title: "VECTOR_SIGIL", 
+        artist: "HELVETE VEKTOR",
+        method: "Industrial decay, mechanical scream",
+        img: "bg.jpg" 
+    }
+];
+
+function renderClinical() {
+    const container = document.getElementById('clinical-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    clinicalData.forEach(item => {
+        container.innerHTML += `
+            <div class="report-box-vault item-grid-mode" style="border-left: 2px solid var(--red);">
+                <div class="art-frame"><img src="${item.img}"></div>
+                <div class="info-content">
+                    <h3 class="latin" style="color:var(--bone);">${item.title}</h3>
+                    <div style="font-size:0.75em; color:#666; margin-top:10px;">
+                        <span style="color:var(--red);">ID:</span> ${item.id} <br>
+                        <span style="color:var(--red);">METHOD:</span> ${item.method}
+                    </div>
+                </div>
+                <div class="action-zone">
+                    <a href="mailto:order@septikchant.com?subject=PROCURE_${item.id}" class="nav-link">[ PROCURE_ARTIFACT ]</a>
+                </div>
+            </div>`;
+    });
+}
+
+let currentClinicalView = 'grid'; // Стан вигляду для релізів
+
+// 1. Зміна вигляду
+function setClinicalView(mode) {
+    currentClinicalView = mode;
+    const container = document.getElementById('clinical-container');
+    
+    // Перемикаємо класи контейнера
+    if (mode === 'list') {
+        container.classList.add('list-mode');
+    } else {
+        container.classList.remove('list-mode');
+    }
+
+    // Оновлюємо кнопки
+    document.getElementById('btn-clin-grid').classList.toggle('active', mode === 'grid');
+    document.getElementById('btn-clin-list').classList.toggle('active', mode === 'list');
+
+    filterClinical(); // Перемальовуємо
+}
+
+// 2. Фільтрація
+function filterClinical() {
+    const searchVal = document.getElementById('clinical-search').value.toLowerCase();
+    
+    const filtered = clinicalData.filter(item => {
+        return item.title.toLowerCase().includes(searchVal) || 
+               item.artist.toLowerCase().includes(searchVal) ||
+               item.method.toLowerCase().includes(searchVal) ||
+               item.id.toLowerCase().includes(searchVal);
+    });
+
+    renderClinical(filtered);
+}
+
+// 3. Оновлений Рендер
+function renderClinical(data = clinicalData) {
+    const container = document.getElementById('clinical-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    data.forEach(item => {
+        const modeClass = (currentClinicalView === 'list' ? 'item-list-mode' : 'item-grid-mode');
+
+        container.innerHTML += `
+            <div class="report-box-vault ${modeClass}" style="border-left: 2px solid var(--red);">
+                <div class="art-frame">
+                    <img src="${item.img}" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div class="info-content" style="flex-grow:1;">
+                    <h3 class="latin" style="color:var(--bone);">${item.title}</h3>
+                    <div style="font-size:0.75em; color:#666; margin-top:10px;">
+                        <span style="color:var(--red);">CASE_ID:</span> ${item.id} <br>
+                        <span style="color:var(--red);">METHOD:</span> ${item.method}
+                    </div>
+                </div>
+                <div class="action-zone">
+                    <a href="mailto:order@septikchant.com?subject=PROCURE_${item.id}" class="nav-link">[ PROCURE_ARTIFACT ]</a>
+                </div>
+            </div>`;
+    });
+}
+
+function openVault(id) {
+    const vault = document.getElementById(id);
+    if (vault) {
+        vault.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+
+        if (id === 'v-vinyl-distro') renderVinyl();
+        if (id === 'v-clinical-vault') renderClinical(); // Запуск твоїх релізів
+        if (id === 'v-cd-distro') renderTapes();
+        if (id === 'v-library-vault') renderBooks();
+    }
+}
+
+ const logs = [
+    "14.01.26: SIGNAL_HELVETE_VEKTOR_DETECTED_IN_SECTOR_B...",
+    "20.01.26: ANALYZING_SOUND_WAVES: 88%_DEGRADATION_DETECTED.",
+    "25.01.26: NEW_PATIENT_ADMITTED: SUBJECT_001_VOID_WALKER.",
+    "02.02.26: PHYSICAL_CARRIERS_SC-002_PREPARATION_88%_COMPLETE.",
+    "SYSTEM_STATUS: STABLE. REALITY_CORRUPTION_IN_PROGRESS..."
+];
+
+function runTerminal() {
+    const logContainer = document.getElementById('terminal-log');
+    logContainer.innerHTML = '';
+    let i = 0;
+
+    function printLine() {
+        if (i < logs.length) {
+            const line = document.createElement('p');
+            line.style.color = "var(--red)";
+            line.style.fontFamily = "monospace";
+            line.innerHTML = `> ${logs[i]}`;
+            logContainer.appendChild(line);
+            i++;
+            setTimeout(printLine, 600); // Швидкість появи рядків
+        }
+    }
+    printLine();
+}
+// Дані для повного списку дистро
+const fullInventory = [
+    "SEPTIC CHANT - ANNIHILATION - LP - TRADE_ONLY",
+    "HELVETE VEKTOR - SIGIL - TAPE - 350 UAH",
+    "DARKTHRONE - A BLAZE IN THE NORTHERN SKY - LP - 1200 UAH",
+    "MÖTIIV - HYGIEIA - TAPE - TRADE_ONLY",
+    "-------------------------------------------",
+    "END_OF_LIST"
+];
+
+function renderBlackMarket() {
+    const container = document.getElementById('market-list');
+    if (!container) return;
+    container.innerHTML = fullInventory.join('<br>');
+}
+
+// Онови функцію openVault, щоб вона запускала рендер списку
+function openVault(id) {
+    const vault = document.getElementById(id);
+    if (vault) {
+        vault.style.display = 'block';
+        if (id === 'v-black-market') renderBlackMarket();
+        // інші рендери...
+    }
+}
+
+function openVault(id) {
+    const vault = document.getElementById(id);
+    if (vault) {
+        vault.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        // Специфічні рендери для інших розділів залишаються без змін
+    }
+}
+
+function openVault(id) {
+    const vault = document.getElementById(id);
+    if (vault) {
+        vault.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        // Рендери для динамічних розділів
+        if (id === 'v-black-market') renderBlackMarket();
+        if (id === 'v-clinical-vault') renderClinical();
+        // ... решта розділів
+    }
+}
 
 </script>
-</body>
 </html>
