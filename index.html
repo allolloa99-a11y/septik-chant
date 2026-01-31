@@ -578,10 +578,7 @@ img {
     <span onclick="openVault('v-propaganda')" class="nav-link">[ PROPAGANDA_CORPS ]</span>
     </nav>
 
-    <div class="hamburger" onclick="toggleMenu()">
-    <span></span>
-    <span></span>
-    <span></span>
+    
 </div>
 
 </header>
@@ -2089,22 +2086,5 @@ document.querySelectorAll('.nav-link').forEach(link => {
         document.querySelector('.terminal-nav').classList.remove('active');
     });
 });
-
-function openVault(id) {
-    // Закрываем мобильное меню при открытии любого раздела
-    document.querySelector('.terminal-nav').classList.remove('active');
-    
-    const vault = document.getElementById(id);
-    if (vault) {
-        vault.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-        
-        // Твои рендеры (renderVinyl, renderClinical и т.д.)
-        if (id === 'v-vinyl-distro') renderVinyl();
-        if (id === 'v-clinical-vault') renderClinical();
-        if (id === 'v-black-market') renderBlackMarket();
-    }
-}
-
 </script>
 </html>
