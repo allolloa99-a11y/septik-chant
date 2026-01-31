@@ -2050,17 +2050,30 @@ function openVault(id) {
 }
 
 function openVault(id) {
+    // Додаємо захист: якщо меню немає, просто йдемо далі
+    const nav = document.querySelector('.terminal-nav');
+    if (nav) nav.classList.remove('active');
+    
     const vault = document.getElementById(id);
     if (vault) {
+        // Ховаємо всі відкриті валти перед відкриттям нового (щоб не накладалися)
+        document.querySelectorAll('.full-page').forEach(v => v.style.display = 'none');
+        
         vault.style.display = 'block';
         document.body.style.overflow = 'hidden';
-        
-        // Рендери для динамічних розділів
-        if (id === 'v-black-market') renderBlackMarket();
+
+        // Запуск рендерів
+        if (id === 'v-vinyl-distro') renderVinyl();
         if (id === 'v-clinical-vault') renderClinical();
-        // ... решта розділів
+        if (id === 'v-black-market') renderBlackMarket();
+        if (id === 'v-cd-distro') renderTapes();
+        if (id === 'v-library-vault') renderBooks();
+    } else {
+        console.error("Vault з ID " + id + " не знайдено!");
     }
 }
+
+
 function toggleMenu() {
     const nav = document.querySelector('.terminal-nav');
     nav.classList.toggle('active');
