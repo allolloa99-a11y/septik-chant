@@ -7,11 +7,8 @@
     <meta name="description" content="SEP7IK CHANT - Блек-метал лейбл, касети, вініл та заборонена бібліотека.">
     <meta name="keywords" content="Black Metal, Sep7ik Chant, Cassettes, Vinyl, Underground Label">
     <meta name="robots" content="index, follow">
-    <meta name="description" content="RAW BLACK METAL // HELVETE VEKTOR // SEPTIK CHANT ARCHIVES">
-<meta name="theme-color" content="#050505"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEP⸸IK CHAN⸸ | NO SALVATION</title>
-    <link rel="icon" href="SC.jpg" type="image/png">
+    <link rel="manifest" href="manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #00000000; --bone: #ffffff; --dim: #111; --red: #600; --line-weight: 1px; }
@@ -394,135 +391,112 @@ body, .full-page {
     cursor: text;
 }
 
-/* Адаптив для мобільних пристроїв */
-@media screen and (max-width: 768px) {
-    
-    /* 1. Головна навігація: в один стовпчик */
-    .terminal-nav {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        align-items: center;
-        padding: 20px 0;
-    }
-
-    /* 2. Контейнери (Вініл, Касети): в одну колонку */
-    #vinyl-container, #tape-container, #clinical-container {
-        grid-template-columns: 1fr !important; /* Тільки один предмет в рядку */
-        gap: 20px !important;
-        padding: 10px;
-    }
-
-    /* 3. Звіти (Report Boxes): адаптація розмірів */
-    .report-box-vault {
-        flex-direction: column !important; /* Картинка зверху, текст знизу */
-        text-align: center;
-        height: auto !important;
-        padding: 15px !important;
-    }
-
-    .art-frame {
-        width: 100% !important;
-        max-width: 250px;
-        height: 250px !important;
-        margin: 0 auto 15px auto !important;
-    }
-
-    /* 4. Шрифти: зменшуємо гігантські заголовки */
-    h2.latin {
-        font-size: 1.8em !important;
-    }
-
-    /* 5. Панель керування (Пошук/Фільтри) */
-    .vault-controls {
-        flex-direction: column;
-        gap: 15px;
-        padding: 10px;
-    }
-
-    .search-group {
-        width: 100%;
-        flex-direction: column;
-    }
-
-    input, select {
-        width: 100% !important;
-    }
-
-    /* 6. Плеєр у футері */
-    .audio-controls {
-        padding: 15px 5px !important;
-    }
-    
-    .audio-controls-wrap {
-        width: 100% !important;
-        gap: 10px !important;
-    }
-
-    /* 7. Форма [ PATIENT_APPLICATION ] */
-    form, .ritual-container {
-        padding: 20px !important;
-        width: 95% !important;
-        margin: 0 auto;
-    }
-}
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-    /* Базовый стиль гамбургера */
-.hamburger {
-    display: none; /* Скрыт на ПК */
-    cursor: pointer;
-    flex-direction: column;
-    gap: 6px;
-    padding: 10px;
-    z-index: 1001;
+.secret-trigger {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    background: rgba(0,0,0,0.8);
-    border: 1px solid var(--red);
+    bottom: 5px;
+    right: 5px;
+    width: 15px;
+    height: 15px;
+    cursor: crosshair;
+    opacity: 0.05; /* Майже невидима */
+    z-index: 9999;
+    color: var(--red);
+    font-family: monospace;
 }
 
-.hamburger span {
-    display: block;
-    width: 25px;
-    height: 2px;
-    background-color: var(--red);
-    transition: 0.3s;
+.secret-trigger:hover {
+    opacity: 0.5; /* Проявляється при наведенні */
 }
 
-/* Стили для мобилок (внутри твоего @media screen and (max-width: 768px)) */
-@media screen and (max-width: 768px) {
-    .hamburger {
-        display: flex; /* Показываем на мобилке */
-    }
+/* Контейнер шлюзу */
+.gate-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 
-    .terminal-nav {
-        display: none; /* Прячем меню по умолчанию */
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background: rgba(5, 5, 5, 0.98);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        gap: 30px;
-    }
+/* Сітка кнопок (для 2 етапу) */
+.gate-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Рівно 2 колонки */
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+}
 
-    /* Когда меню открыто (добавим этот класс через JS) */
-    .terminal-nav.active {
-        display: flex;
-    }
+/* Самі кнопки - прибираємо білий, робимо в гамму */
+.gate-btn {
+    background: transparent;
+    border: 1px solid #222;
+    color: var(--bone);
+    padding: 15px;
+    cursor: pointer;
+    font-family: 'Syne Mono', monospace;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
 
-    .terminal-nav .nav-link {
-        font-size: 1.5em; /* Делаем ссылки крупнее для пальцев */
-    }
+.gate-btn:hover {
+    border-color: var(--red);
+    color: var(--red);
+    background: rgba(255, 0, 0, 0.05);
+    letter-spacing: 2px;
+}
+
+/* Опції для 1 етапу */
+.gate-options {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.gate-options .gate-btn {
+    flex: 1; /* Рівномірна ширина */
+}
+
+/* Головний оверлей шлюзу */
+#v-gate-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 10000;
+    /* Вирівнювання всього вікна */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#gate-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрує кнопки по горизонталі */
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto; /* Примусовий центр */
+    text-align: center;
+}
+
+.gate-options, .gate-grid {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.gate-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 400px;
 }
 
     </style>
@@ -576,11 +550,8 @@ img {
     <span onclick="openVault('v-submission')" class="nav-link">[ SUBMISSION_RITUAL ]</span>
     <span onclick="openVault('v-black-market')" class="nav-link">[ BLACK_MARKET_LIST ]</span>
     <span onclick="openVault('v-propaganda')" class="nav-link">[ PROPAGANDA_CORPS ]</span>
-    </nav>
-
     
-</div>
-
+    </nav>
 </header>
 
 <main>
@@ -1188,7 +1159,32 @@ SUBJECT: TRADE_INQUIRY // [LABEL_NAME]
     </div>
 </div>
 
-
+<div class="secret-trigger" onclick="initiateGate()" title="TERMINAL_ACCESS">.</div>
+<div id="v-gate-overlay" class="full-page" style="display: none; background: #000; z-index: 10000;">
+    <button class="close-btn" onclick="terminateGate()">[ DISCONNECT_SIGNAL ]</button>
+    
+    <div id="gate-content" class="content-wrap" style="text-align: center; max-width: 600px; margin-top: 20vh;">
+        </div>
+</div>
+<div id="v-matrix-node" class="full-page" style="background: #000; padding: 0; display: none;">
+    <button class="close-btn" onclick="closeVault('v-matrix-node')">[ TERMINATE_SIGNAL ]</button>
+    <div style="height: 100%; display: flex; flex-direction: column;">
+        <div style="padding: 15px; text-align: center; border-bottom: 1px solid #1a0000;">
+            <h2 class="latin" style="color: var(--red); font-size: 0.9em; margin: 0; letter-spacing: 5px;">
+                INNER_CIRCLE // SECURE_NODE
+            </h2>
+        </div>
+        
+        <div style="flex-grow: 1; position: relative; background: #000;">
+            <iframe 
+                id="matrix-chat-frame"
+                src="https://app.element.io/#/room/!cLXqGfZBveFSPtotHH:matrix.org" 
+                style="width: 100%; height: 100%; border: none; filter: grayscale(1) invert(1) sepia(1) hue-rotate(-50deg) saturate(2) brightness(0.6);"
+                allow="camera; microphone; display-capture">
+            </iframe>
+        </div>
+    </div>
+</div>
 
 </body>
 
@@ -2047,44 +2043,175 @@ function openVault(id) {
 }
 
 function openVault(id) {
-    // Додаємо захист: якщо меню немає, просто йдемо далі
-    const nav = document.querySelector('.terminal-nav');
-    if (nav) nav.classList.remove('active');
-    
     const vault = document.getElementById(id);
     if (vault) {
-        // Ховаємо всі відкриті валти перед відкриттям нового (щоб не накладалися)
-        document.querySelectorAll('.full-page').forEach(v => v.style.display = 'none');
-        
         vault.style.display = 'block';
         document.body.style.overflow = 'hidden';
-
-        // Запуск рендерів
-        if (id === 'v-vinyl-distro') renderVinyl();
-        if (id === 'v-clinical-vault') renderClinical();
+        
+        // Рендери для динамічних розділів
         if (id === 'v-black-market') renderBlackMarket();
-        if (id === 'v-cd-distro') renderTapes();
-        if (id === 'v-library-vault') renderBooks();
+        if (id === 'v-clinical-vault') renderClinical();
+        // ... решта розділів
+    }
+}
+
+    function initiateGate() {
+    // Відкриваємо основний оверлей
+    document.getElementById('v-gate-overlay').style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Блокуємо скрол сайту
+    
+    // Запускаємо перший етап (Капчу)
+    renderPurityTest(); 
+}
+
+function terminateGate() {
+    document.getElementById('v-gate-overlay').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Функция отрисовки первого вопроса (Бог)
+function renderPurityTest() {
+    const container = document.getElementById('gate-content');
+    container.innerHTML = `
+        <h1 class="latin" style="color: var(--red); font-size: 3em; margin-bottom: 0;">IDENTIFICATION</h1>
+        <p style="color: var(--red); font-size: 1.5em; margin-top: 0; font-family: 'Syne Mono';">ШАГ_01</p>
+        
+        <p style="color: var(--bone); margin-top: 40px; letter-spacing: 2px;">ВЕРИТЕ ЛИ ВЫ В БОГА?</p>
+        
+        <div class="gate-options">
+            <button onclick="execution()" class="gate-btn">[ ДА ]</button>
+            <button onclick="renderIdentityTest()" class="gate-btn">[ НЕТ ]</button>
+        </div>
+    `;
+}
+
+function renderIdentityTest() {
+    const container = document.getElementById('gate-content');
+    container.innerHTML = `
+        <h1 class="latin" style="color: var(--red); font-size: 3em; margin-bottom: 0;">IDENTIFICATION</h1>
+        <p style="color: var(--red); font-size: 1.5em; margin-top: 0; font-family: 'Syne Mono';">ШАГ_02</p>
+        
+        <p style="color: var(--bone); margin-top: 40px; letter-spacing: 2px;">ВАША СУТЬ?</p>
+        
+        <div class="gate-grid">
+            <button onclick="renderPasswordEntry()" class="gate-btn">[ САТАНИСТ ]</button>
+            <button onclick="renderPasswordEntry()" class="gate-btn">[ ЯЗЫЧНИК ]</button>
+            <button onclick="execution()" class="gate-btn">[ АТЕИСТ ]</button>
+            <button onclick="execution()" class="gate-btn">[ ТУРИСТ ]</button>
+        </div>
+    `;
+}
+
+
+// Функция наказания (БАН)
+function execution() {
+    // Ставим метку в браузер, что этот юзер - "неверный"
+    localStorage.setItem('banned_vessel', 'true');
+    
+    // Мгновенная визуальная смерть сайта
+    document.body.innerHTML = `
+        <div style="background:#fff; color:#000; height:100vh; width:100vw; display:flex; align-items:center; justify-content:center; font-family:serif; text-align:center; position:fixed; top:0; left:0; z-index:99999;">
+            <div style="max-width: 600px; padding: 20px;">
+                <h1 style="font-size:3em; margin-bottom: 20px;">ACCESS_DENIED</h1>
+                <p style="font-size:1.5em; line-height: 1.6;">Свет ослепил вас. В этих архивах нет места для тех, кто ищет спасения или не имеет веры в Тьму.</p>
+                <p style="margin-top: 40px; color: #666; font-size: 0.8em;">SIGNAL_TERMINATED // IP_LOGGED</p>
+            </div>
+        </div>
+    `;
+}
+
+// Проверка бана при каждой загрузке страницы
+window.addEventListener('load', () => {
+    if (localStorage.getItem('banned_vessel') === 'true') {
+        execution();
+    }
+});
+
+
+function renderPasswordEntry() {
+    const container = document.getElementById('gate-content');
+    container.innerHTML = `
+        <h2 class="latin" style="color: var(--red); letter-spacing: 2px;">DECRYPTION_KEY</h2>
+        <p style="margin-top: 20px; font-size: 0.8em; color: #444;">ВВЕДИТЕ КЛЮЧ ДЛЯ ПОДКЛЮЧЕНИЯ К СЕТИ MATRIX</p>
+        <input type="password" id="final-key" placeholder="********" 
+               style="background: #000; border: 1px solid #222; color: var(--red); padding: 15px; width: 80%; text-align: center; margin-top: 30px; font-family: monospace;">
+        <br>
+        <button onclick="verifyFinalKey()" class="nav-link" style="margin-top: 30px; padding: 10px 50px;">
+            [ CONNECT_TO_DARK_CIRCLE ]
+        </button>
+    `;
+}
+
+function verifyFinalKey() {
+    const input = document.getElementById('final-key').value;
+    const masterKey = "HELVETE_CIRCLE_2026"; 
+
+    if (input === masterKey) {
+        // Перевіряємо, чи запущено це як додаток (standalone)
+        const isApp = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
+        if (isApp) {
+            alert("ACCESS_GRANTED. CONNECTING TO MATRIX...");
+            openVault('v-matrix-node'); 
+            terminateGate();
+        } else {
+            // Якщо людина на сайті — даємо тільки посилання на софт
+            const container = document.getElementById('gate-content');
+            container.innerHTML = `
+                <h2 class="latin" style="color: var(--red);">WEB_LIMITATION</h2>
+                <p style="color: var(--bone); margin: 20px 0;">ЧАТ ДОСТУПЕН ТОЛЬКО ВНУТРИ АВТОНОМНОГО ПРИЛОЖЕНИЯ.</p>
+                <a href="app/septik_node.apk" class="gate-btn" style="text-decoration:none; display:block;">
+                    [ СКАЧАТЬ APK_NODE ]
+                </a>
+                <p style="font-size:0.6em; color:#333; margin-top:20px;">УСТАНОВИТЕ НОД ДЛЯ ВХОДА В КРУГ</p>
+            `;
+        }
     } else {
-        console.error("Vault з ID " + id + " не знайдено!");
+        alert("CRITICAL_ERROR: WRONG_KEY");
+        execution(); 
+    }
+}
+
+let adminClicks = 0;
+
+function execution() {
+    localStorage.setItem('banned_vessel', 'true');
+    
+    // Створюємо екран смерті
+    document.body.innerHTML = `
+        <div id="death-screen" style="background:#000; color:var(--red); height:100vh; width:100vw; display:flex; align-items:center; justify-content:center; flex-direction:column; font-family:monospace; text-align:center; position:fixed; top:0; left:0; z-index:99999; border: 15px solid #1a0000; transition: background-color 0.1s ease;">
+            <h1 id="admin-unlock" style="font-size:3.5em; margin-bottom: 20px; cursor:default; user-select:none; text-shadow: 0 0 15px #ff0000;">ACCESS_DENIED</h1>
+            <p style="color:var(--bone); opacity:0.7; max-width:500px; line-height:1.6; font-size:1.1em;">Свет ослепил вас. В этих архивах нет места для тех, кто ищет спасения.</p>
+            <p style="margin-top: 50px; color: #333; font-size: 0.8em; letter-spacing: 5px;">SESSION_TERMINATED // IP_LOGGED</p>
+        </div>
+    `;
+
+    const screen = document.getElementById('death-screen');
+    const unlockTrigger = document.getElementById('admin-unlock');
+
+    if (unlockTrigger) {
+        unlockTrigger.addEventListener('click', () => {
+            adminClicks++;
+            
+            // ЧЕРВОНИЙ СИГНАЛ: при кожному кліку фон ледь блимає червоним
+            screen.style.backgroundColor = '#1a0000';
+            setTimeout(() => { screen.style.backgroundColor = '#000'; }, 50);
+
+            if (adminClicks >= 5) {
+                localStorage.removeItem('banned_vessel');
+                
+                // REBOOTING SYSTEM: ефект спалаху
+                screen.style.backgroundColor = '#fff'; 
+                screen.innerHTML = `<h1 style="color:#000; font-size:2em;">REBOOTING_SYSTEM...</h1>`;
+                
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            }
+        });
     }
 }
 
 
-function toggleMenu() {
-    const nav = document.querySelector('.terminal-nav');
-    nav.classList.toggle('active');
-    
-    // Опционально: анимация самих полосок в "крестик"
-    const burger = document.querySelector('.hamburger');
-    burger.classList.toggle('open');
-}
-
-// Чтобы при клике на ссылку меню само закрывалось
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        document.querySelector('.terminal-nav').classList.remove('active');
-    });
-});
 </script>
 </html>
